@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-  Future<void> signUp({required String email, required String password}) async {
+  static Future<UserCredential?> signUp(
+      {required String email, required String password}) async {
     try {
-      _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      return await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
         throw Exception("The email was used for another user");
@@ -20,5 +19,6 @@ class AuthService {
     } catch (e) {
       throw Exception(e.toString());
     }
+    return null;
   }
 }
