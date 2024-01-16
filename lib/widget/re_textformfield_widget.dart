@@ -7,11 +7,14 @@ class ReTextFormFieldWidget extends StatelessWidget {
 
   final TextEditingController controller;
   final String labelText;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      keyboardType: TextInputType.phone,
+      keyboardType: (labelText == "Email")
+          ? TextInputType.emailAddress
+          : TextInputType.text,
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xFFFEFEFE),
@@ -29,6 +32,7 @@ class ReTextFormFieldWidget extends StatelessWidget {
             bottom: Get.height * 0.01),
         labelText: labelText,
       ),
+      obscureText: (labelText == "Password") ? true : false,
     );
   }
 }

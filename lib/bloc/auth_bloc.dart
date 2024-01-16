@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:new_chatify/service/auth_service.dart';
 
@@ -18,6 +19,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<AuthSigninRequested>((event, emit) async {});
+    // on<AuthSigninRequested>((event, emit) async {});
   }
 }
