@@ -51,10 +51,12 @@ class _SignupViewState extends State<SignupView> {
                   SizedBox(height: Get.height * 0.01),
                   ReTextFormFieldWidget(
                     controller: _emailController,
+                    labelText: 'Email',
                   ),
                   SizedBox(height: Get.height * 0.02),
                   ReTextFormFieldWidget(
                     controller: _passwordController,
+                    labelText: 'Password',
                   ),
                   SizedBox(height: Get.height * 0.02),
                   const ReRememberWidget(),
