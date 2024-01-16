@@ -14,7 +14,7 @@ class ReLogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      "assets/launcher/chatify.png",
+      "assets/logo.png",
       width: width ?? Get.width * 0.47,
       height: height ?? Get.height * 0.22,
     );
