@@ -1,11 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  static Future<UserCredential?> signUp(
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+  Future<UserCredential?> signUp(
       {required String email, required String password}) async {
     try {
-      return await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+      var userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      firebaseFirestore.collection("users").doc(userCredential.user!.uid).set({
+        "uid": userCredential.user!.uid,
+        "email": userCredential.user!.email
+      });
+
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
         throw Exception("The email was used for another user");
@@ -22,11 +32,17 @@ class AuthService {
     return null;
   }
 
-  static Future<UserCredential?> signIn(
+  Future<UserCredential?> signIn(
       {required String email, required String password}) async {
     try {
-      return await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      var userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      firebaseFirestore.collection("users").doc(userCredential.user!.uid).set({
+        "uid": userCredential.user!.uid,
+        "email": userCredential.user!.email
+      }, SetOptions(merge: true));
+
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == "invalid-email") {
         throw Exception("The email is invalid");
@@ -43,9 +59,9 @@ class AuthService {
     return null;
   }
 
-  static Future<void> signOut() async {
+  Future<void> signOut() async {
     try {
-      await FirebaseAuth.instance.signOut();
+      await firebaseAuth.signOut();
     } catch (e) {
       throw Exception(e.toString());
     }

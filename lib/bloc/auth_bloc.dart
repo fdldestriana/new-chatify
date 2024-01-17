@@ -6,11 +6,13 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  final AuthService authService = AuthService();
+
   AuthBloc() : super(AuthInitial()) {
     on<AuthSignupRequested>((event, emit) async {
       try {
         emit(AuthLoadingState());
-        final userCred = await AuthService.signUp(
+        final userCred = await authService.signUp(
             email: event.email, password: event.password);
         emit(AuthSuccedState(email: userCred!.user!.email.toString()));
       } catch (e) {
@@ -21,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSigninRequested>((event, emit) async {
       try {
         emit(AuthLoadingState());
-        final userCred = await AuthService.signIn(
+        final userCred = await authService.signIn(
             email: event.email, password: event.password);
         emit(AuthSuccedState(email: userCred!.user!.email.toString()));
       } catch (e) {
@@ -31,7 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthSignoutRequested>((event, emit) async {
       try {
-        await AuthService.signOut();
+        await authService.signOut();
       } catch (e) {
         emit(AuthFailedState(errorMessage: e.toString()));
       }

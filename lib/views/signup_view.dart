@@ -12,7 +12,9 @@ import 'package:new_chatify/widget/re_remember_widget.dart';
 import 'package:new_chatify/widget/re_textformfield_widget.dart';
 
 class SignupView extends StatefulWidget {
-  const SignupView({super.key});
+  const SignupView({required this.toogle, super.key});
+
+  final void toogle;
 
   @override
   State<SignupView> createState() => _SignupViewState();
@@ -44,9 +46,9 @@ class _SignupViewState extends State<SignupView> {
           if (state is AuthSuccedState) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
               builder: (_) {
-                return ScreenChatListView(
-                  email: state.email.toString(),
-                );
+                return const ScreenChatListView(
+                    // email: state.email.toString(),
+                    );
               },
             ), (route) => false);
           }
@@ -111,7 +113,7 @@ class _SignupViewState extends State<SignupView> {
                       ReBottomTextAuthScreenWidget(
                         text: "Already have an Account? ",
                         title: "Sign in",
-                        onTap: () {},
+                        onTap: () => widget.toogle,
                       )
                     ],
                   ),

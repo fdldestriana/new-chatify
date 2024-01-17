@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_chatify/bloc/auth_bloc.dart';
 import 'package:new_chatify/firebase_options.dart';
 import 'package:new_chatify/state_util.dart';
-import 'package:new_chatify/views/signup_view.dart';
+import 'package:new_chatify/views/screen_chat_list_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,12 +21,11 @@ class MyApp extends StatelessWidget {
       create: (BuildContext context) => AuthBloc(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const SignupView(),
+        home: const ScreenChatListView(),
         navigatorKey: Get.navigatorKey,
       ),
     );
