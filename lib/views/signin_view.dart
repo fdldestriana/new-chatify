@@ -69,7 +69,7 @@ class _SigninViewState extends State<SigninView> {
               children: [
                 SizedBox(height: Get.height * 0.10),
                 const ReLogoWidget(),
-                const ReNotLoggedInWidget(title: "Sign up for free"),
+                const ReNotLoggedInWidget(title: "Sign in to your Account"),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.11),
                   child: Column(
