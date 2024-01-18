@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:new_chatify/bloc/auth_bloc.dart';
 import 'package:new_chatify/state_util.dart';
 import 'package:new_chatify/views/screen_chat_list_view.dart';
+import 'package:new_chatify/views/signin_view.dart';
 import 'package:new_chatify/widget/re_bottotextauthscreen_widget.dart';
 import 'package:new_chatify/widget/re_button_widget.dart';
 import 'package:new_chatify/widget/re_logo_widget.dart';
@@ -12,9 +13,7 @@ import 'package:new_chatify/widget/re_remember_widget.dart';
 import 'package:new_chatify/widget/re_textformfield_widget.dart';
 
 class SignupView extends StatefulWidget {
-  const SignupView({required this.toogle, super.key});
-
-  final void toogle;
+  const SignupView({super.key});
 
   @override
   State<SignupView> createState() => _SignupViewState();
@@ -113,7 +112,11 @@ class _SignupViewState extends State<SignupView> {
                       ReBottomTextAuthScreenWidget(
                         text: "Already have an Account? ",
                         title: "Sign in",
-                        onTap: () => widget.toogle,
+                        onTap: () => Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SigninView()),
+                            (route) => false),
                       )
                     ],
                   ),
