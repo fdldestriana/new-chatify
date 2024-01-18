@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_chatify/bloc/auth_bloc.dart';
 import 'package:new_chatify/bloc/user_bloc.dart';
 
 class ScreenChatListView extends StatefulWidget {
@@ -30,9 +32,12 @@ class _ScreenChatListViewState extends State<ScreenChatListView> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<AuthBloc>().add(AuthSignoutRequested());
+            },
             icon: const Icon(
-              Icons.more_vert,
+              // Icons.more_vert,
+              Icons.logout,
               size: 26.0,
             ),
           )
@@ -57,10 +62,20 @@ class _ScreenChatListViewState extends State<ScreenChatListView> {
               child: ListView.builder(
                 itemCount: state.users.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Text(
-                    state.users[index].email,
-                    style: GoogleFonts.poppins(fontSize: 18),
-                  );
+                  if (state.users[index].id !=
+                      FirebaseAuth.instance.currentUser!.uid) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: ListTile(
+                        leading: const Icon(Icons.person_2_rounded),
+                        title: Text(
+                          state.users[index].email,
+                          style: GoogleFonts.poppins(fontSize: 18),
+                        ),
+                      ),
+                    );
+                  }
+                  return null;
                 },
               ),
             );

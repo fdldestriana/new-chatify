@@ -7,12 +7,20 @@ class ChatService {
 
   Future<List<User>> getUser() async {
     List<User> userList = [];
-    users.snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) {
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        userList.add(User(id: doc.id, email: data["email"]));
-      });
-    });
+    await users.get().then(
+      (value) {
+        final data = value.docs;
+        userList = data.map(
+          (e) {
+            var newData = e.data() as Map<String, dynamic>;
+            return User(id: newData["uid"], email: newData["email"]);
+          },
+        ).toList();
+      },
+      onError: (error) {
+        throw Exception(error.toString());
+      },
+    );
     return userList;
   }
 }
