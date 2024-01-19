@@ -7,7 +7,7 @@ import 'package:new_chatify/bloc/user_bloc.dart';
 import 'package:new_chatify/firebase_options.dart';
 import 'package:new_chatify/state_util.dart';
 import 'package:new_chatify/views/screen_chat_list_view.dart';
-import 'package:new_chatify/views/signup_view.dart';
+import 'package:new_chatify/views/signin_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
         home: (FirebaseAuth.instance.currentUser != null)
             ? const ScreenChatListView()
-            : const SignupView(),
+            : const SigninView(),
         navigatorKey: Get.navigatorKey,
       ),
     );
