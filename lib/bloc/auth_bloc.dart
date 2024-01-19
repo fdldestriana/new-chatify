@@ -33,6 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthSignoutRequested>((event, emit) async {
       try {
+        emit(AuthLoadingState());
         await authService.signOut();
         emit(AuthSignoutSuccedState());
       } catch (e) {
