@@ -1,21 +1,8 @@
-<<<<<<< HEAD
-# new_chatify
+#Chatify
 
-A new Flutter project.
+<div style="text-align: justify">
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# new-chatify
-This is my personal project to learn creating chat app using a design from Figma community and Firebase as a backend service
->>>>>>> 8e7176763f15a03db914a314a88a268e149bd2bf
+This is my project to learn to create a chat app using Firebase as a backend.
+The design that I am using is from the Figma community, [here it is](https://www.figma.com/file/r2HmOFGs3NiDkGeOFTae1f/Chatify(Chat-Application)-(Community)?type=design&node-id=0-1&mode=design&t=wDijjPkCUoz6XfKh-0)
+  
+</div>
