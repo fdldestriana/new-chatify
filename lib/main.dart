@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_chatify/bloc/auth_bloc.dart';
-import 'package:new_chatify/bloc/user_bloc.dart';
+import 'package:new_chatify/bloc/auth/auth_bloc.dart';
+import 'package:new_chatify/bloc/user/user_bloc.dart';
 import 'package:new_chatify/firebase_options.dart';
 import 'package:new_chatify/state_util.dart';
-import 'package:new_chatify/views/screen_chat_list_view.dart';
+import 'package:new_chatify/views/chat_room_list_view.dart';
 import 'package:new_chatify/views/signin_view.dart';
 
 void main() async {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: (FirebaseAuth.instance.currentUser != null)
-            ? const ScreenChatListView()
+            ? const ChatRoomListView()
             : const SigninView(),
         navigatorKey: Get.navigatorKey,
       ),

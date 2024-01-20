@@ -4,16 +4,14 @@ sealed class UserState {}
 
 final class UserInitialState extends UserState {}
 
-final class UserLoadSuccedState extends UserState {
+final class UsersLoadSuccedState extends UserState {
   final List<UserApp> users;
-
-  UserLoadSuccedState({required this.users});
+  UsersLoadSuccedState({required this.users});
 }
 
 final class UserLoadingState extends UserState {}
 
 final class UserLoadFailedState extends UserState {
   final String errorMessage;
-
   UserLoadFailedState({required this.errorMessage});
 }

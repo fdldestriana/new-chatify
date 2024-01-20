@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_chatify/bloc/auth_bloc.dart';
-import 'package:new_chatify/bloc/user_bloc.dart';
+import 'package:new_chatify/bloc/auth/auth_bloc.dart';
+import 'package:new_chatify/bloc/user/user_bloc.dart';
+import 'package:new_chatify/data/model/user_app.dart';
+import 'package:new_chatify/views/chat_room_view.dart';
 import 'package:new_chatify/views/signin_view.dart';
 
-class ScreenChatListView extends StatefulWidget {
-  const ScreenChatListView({super.key});
+class ChatRoomListView extends StatefulWidget {
+  const ChatRoomListView({super.key});
 
   @override
-  State<ScreenChatListView> createState() => _ScreenChatListViewState();
+  State<ChatRoomListView> createState() => _ChatRoomListViewState();
 }
 
-class _ScreenChatListViewState extends State<ScreenChatListView> {
+class _ChatRoomListViewState extends State<ChatRoomListView> {
   @override
   void initState() {
     super.initState();
@@ -68,24 +70,33 @@ class _ScreenChatListViewState extends State<ScreenChatListView> {
             ),
           );
         }
-        state as UserLoadSuccedState;
-        return Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: ListView.builder(
-            itemCount: state.users.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () {},
-                child: ListTile(
-                  leading: const Icon(Icons.person_2_rounded),
-                  title: Text(
-                    state.users[index].email,
-                    style: GoogleFonts.poppins(fontSize: 18),
+        state as UsersLoadSuccedState;
+        return ListView.builder(
+          itemCount: state.users.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatRoomView(
+                      user: UserApp(
+                          id: state.users[index].id,
+                          email: state.users[index].email),
+                    ),
                   ),
+                );
+              },
+              child: ListTile(
+                leading:
+                    const CircleAvatar(child: Icon(Icons.person_2_rounded)),
+                title: Text(
+                  state.users[index].email,
+                  style: GoogleFonts.poppins(fontSize: 18),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         );
       }),
     );

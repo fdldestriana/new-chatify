@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_chatify/bloc/auth_bloc.dart';
+import 'package:new_chatify/bloc/auth/auth_bloc.dart';
 import 'package:new_chatify/state_util.dart';
-import 'package:new_chatify/views/screen_chat_list_view.dart';
+import 'package:new_chatify/views/chat_room_list_view.dart';
 import 'package:new_chatify/views/signup_view.dart';
 import 'package:new_chatify/widget/re_bottotextauthscreen_widget.dart';
 import 'package:new_chatify/widget/re_button_widget.dart';
@@ -45,7 +45,7 @@ class _SigninViewState extends State<SigninView> {
           if (state is AuthSuccedState) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
               builder: (_) {
-                return const ScreenChatListView(
+                return const ChatRoomListView(
                     // email: state.email.toString(),
                     );
               },

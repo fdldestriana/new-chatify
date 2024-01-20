@@ -6,13 +6,13 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final UserService chatService = UserService();
+  final UserService userService = UserService();
 
   UserBloc() : super(UserLoadingState()) {
     on<UsersLoadRequested>((event, emit) async {
       try {
-        var users = await chatService.getUsers();
-        emit(UserLoadSuccedState(users: users));
+        var users = await userService.getUsers();
+        emit(UsersLoadSuccedState(users: users));
       } catch (e) {
         emit(UserLoadFailedState(errorMessage: e.toString()));
       }
