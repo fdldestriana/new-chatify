@@ -1,21 +1,22 @@
-<<<<<<< HEAD
-# new_chatify
+# Chatify
 
-A new Flutter project.
+<div style="text-align: justify">
 
-## Getting Started
+This is my project to learn to create a chat app using Firebase as a backend.
+The design that I am using is from the Figma community, [here it is](https://www.figma.com/file/r2HmOFGs3NiDkGeOFTae1f/Chatify(Chat-Application)-(Community)?type=design&node-id=0-1&mode=design&t=wDijjPkCUoz6XfKh-0)
+  
+</div>
 
-This project is a starting point for a Flutter application.
+<div>
 
-A few resources to get you started if this is your first Flutter project:
+Below are the current update of the project.
+  
+</div>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+|                             |                              |
+| ----------------------------------- | ----------------------------------- | 
+| ![Screenshot_1705675782](https://github.com/fdldestriana/new-chatify/assets/97951046/561aabd9-fc26-4add-995f-029ce2696b97) | ![Screenshot_1705675798](https://github.com/fdldestriana/new-chatify/assets/97951046/03bacfa6-00b8-46a6-834a-73a6b9c4d9f1) |
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# new-chatify
-This is my personal project to learn creating chat app using a design from Figma community and Firebase as a backend service
->>>>>>> 8e7176763f15a03db914a314a88a268e149bd2bf
+|                             |                              |
+| ----------------------------------- | ----------------------------------- | 
+| ![Screenshot_1705675817](https://github.com/fdldestriana/new-chatify/assets/97951046/1de04539-8eb6-473c-826f-6ff41e73cd80) | ![Screenshot_1705675824](https://github.com/fdldestriana/new-chatify/assets/97951046/5662365e-65f7-4fc3-81d4-d75e54ad1b0a) |
