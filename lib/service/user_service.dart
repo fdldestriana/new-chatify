@@ -16,7 +16,7 @@ class UserService {
             .where((element) => element.id != firebaseAuth.currentUser!.uid)
             .map((e) {
           Map<String, dynamic> newData = e.data() as Map<String, dynamic>;
-          return UserApp(id: newData["uid"], email: newData["email"]);
+          return UserApp.fromJson(newData);
         }).toList();
       },
       onError: (error) {

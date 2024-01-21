@@ -1,6 +1,10 @@
 class UserApp {
-  final String id;
+  final String uid;
   final String email;
 
-  UserApp({required this.id, required this.email});
+  UserApp({required this.uid, required this.email});
+
+  factory UserApp.fromJson(Map<String, dynamic> json) {
+    return UserApp(uid: json["uid"], email: json["email"]);
+  }
 }

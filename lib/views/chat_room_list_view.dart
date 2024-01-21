@@ -42,7 +42,6 @@ class _ChatRoomListViewState extends State<ChatRoomListView> {
                   (route) => false);
             },
             icon: const Icon(
-              // Icons.more_vert,
               Icons.logout,
               size: 26.0,
             ),
@@ -81,7 +80,7 @@ class _ChatRoomListViewState extends State<ChatRoomListView> {
                   MaterialPageRoute(
                     builder: (context) => ChatRoomView(
                       user: UserApp(
-                          id: state.users[index].id,
+                          uid: state.users[index].uid,
                           email: state.users[index].email),
                     ),
                   ),
@@ -91,7 +90,9 @@ class _ChatRoomListViewState extends State<ChatRoomListView> {
                 leading:
                     const CircleAvatar(child: Icon(Icons.person_2_rounded)),
                 title: Text(
-                  state.users[index].email,
+                  state.users[index].email
+                      .replaceAll("@", " ")
+                      .replaceAll(".com", ""),
                   style: GoogleFonts.poppins(fontSize: 18),
                 ),
               ),
