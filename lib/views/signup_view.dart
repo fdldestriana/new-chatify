@@ -42,7 +42,7 @@ class _SignupViewState extends State<SignupView> {
               ),
             );
           }
-          if (state is AuthSuccedState) {
+          if (state is AuthSucceedState) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
               builder: (_) {
                 return const ChatRoomListView(

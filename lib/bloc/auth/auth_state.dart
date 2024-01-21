@@ -7,10 +7,10 @@ final class AuthInitial extends AuthState {}
 
 final class AuthLoadingState extends AuthState {}
 
-final class AuthSuccedState extends AuthState {
+final class AuthSucceedState extends AuthState {
   final String email;
 
-  AuthSuccedState({required this.email});
+  AuthSucceedState({required this.email});
 }
 
 final class AuthFailedState extends AuthState {

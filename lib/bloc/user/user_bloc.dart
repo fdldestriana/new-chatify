@@ -12,7 +12,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UsersLoadRequested>((event, emit) async {
       try {
         var users = await userService.getUsers();
-        emit(UsersLoadSuccedState(users: users));
+        emit(UsersLoadSucceedState(users: users));
       } catch (e) {
         emit(UserLoadFailedState(errorMessage: e.toString()));
       }

@@ -69,7 +69,7 @@ class _ChatRoomListViewState extends State<ChatRoomListView> {
             ),
           );
         }
-        state as UsersLoadSuccedState;
+        state as UsersLoadSucceedState;
         return ListView.builder(
           itemCount: state.users.length,
           itemBuilder: (BuildContext context, int index) {

@@ -17,4 +17,13 @@ class Message {
         senderId: json["senderId"],
         creationTime: json["creationTime"]);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "message": message,
+      "receiverId": receiverId,
+      "senderId": senderId,
+      "creationTime": creationTime
+    };
+  }
 }

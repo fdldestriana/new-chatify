@@ -14,7 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoadingState());
         final userCred = await authService.signUp(
             email: event.email, password: event.password);
-        emit(AuthSuccedState(email: userCred!.user!.email.toString()));
+        emit(AuthSucceedState(email: userCred!.user!.email.toString()));
       } catch (e) {
         emit(AuthFailedState(errorMessage: e.toString()));
       }
@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoadingState());
         final userCred = await authService.signIn(
             email: event.email, password: event.password);
-        emit(AuthSuccedState(email: userCred!.user!.email.toString()));
+        emit(AuthSucceedState(email: userCred!.user!.email.toString()));
       } catch (e) {
         emit(AuthFailedState(errorMessage: e.toString()));
       }

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_chatify/bloc/auth/auth_bloc.dart';
+import 'package:new_chatify/bloc/chat/bloc/chat_bloc.dart';
 import 'package:new_chatify/bloc/user/user_bloc.dart';
 import 'package:new_chatify/firebase_options.dart';
 import 'package:new_chatify/state_util.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (BuildContext context) => AuthBloc()),
-        BlocProvider(create: (BuildContext context) => UserBloc())
+        BlocProvider(create: (BuildContext context) => ChatBloc()),
+        BlocProvider(create: (BuildContext context) => UserBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
