@@ -4,13 +4,30 @@ import 'package:new_chatify/data/model/message.dart';
 class ChatService {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<void> createChatRoom(
+  Future<void> sendMessages(
       {required String docId, required Message message}) async {
     try {
       firebaseFirestore
           .collection("chats")
           .doc(docId)
-          .set(message.toJson(), SetOptions(merge: true));
+          .collection("messages")
+          .add(message.toJson());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Stream<List<Message>> getMessages({required String docId}) {
+    try {
+      return firebaseFirestore
+          .collection("chats")
+          .doc(docId)
+          .collection("messages")
+          // .orderBy("creationTime", descending: false)
+          .snapshots()
+          .map((event) => event.docs.map((doc) {
+                return Message.fromJson(doc.data());
+              }).toList());
     } catch (e) {
       throw Exception(e.toString());
     }

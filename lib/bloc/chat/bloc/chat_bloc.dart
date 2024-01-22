@@ -7,14 +7,27 @@ part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final ChatService chatService = ChatService();
-  ChatBloc() : super(ChatInitial()) {
-    on<ChatCreateRequested>((event, emit) async {
+  ChatBloc() : super(ChatGetMessageLoadingState()) {
+    on<ChatSendMessagesRequested>((event, emit) async {
       try {
-        await chatService.createChatRoom(
+        await chatService.sendMessages(
             docId: event.docId, message: event.message);
-        emit(ChatCreateSucceedState());
+        emit(ChatSendMessageSucceedState());
       } catch (e) {
-        emit(ChatCreateFailedState(errorMessage: e.toString()));
+        emit(ChatSendFailedState(errorMessage: e.toString()));
+      }
+    });
+
+    on<ChatGetMessagesRequested>((event, emit) async {
+      try {
+        var snapshots = chatService.getMessages(docId: event.docId);
+        List<Message> messages = [];
+        await for (List<Message> message in snapshots) {
+          messages.addAll(message);
+        }
+        emit(ChatGetMessageSucceedState(messages: messages));
+      } catch (e) {
+        emit(ChatGetFailedState(errorMessage: e.toString()));
       }
     });
   }
