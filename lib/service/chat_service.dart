@@ -17,17 +17,19 @@ class ChatService {
     }
   }
 
-  Stream<List<Message>> getMessages({required String docId}) {
+  Stream<List<Message>> getMessages({required String docId}) async* {
     try {
-      return firebaseFirestore
+      yield* firebaseFirestore
           .collection("chats")
           .doc(docId)
           .collection("messages")
-          // .orderBy("creationTime", descending: false)
+          .orderBy("timestamp", descending: false)
           .snapshots()
-          .map((event) => event.docs.map((doc) {
-                return Message.fromJson(doc.data());
-              }).toList());
+          .map(
+            (event) => event.docs.map((doc) {
+              return Message.fromJson(doc.data());
+            }).toList(),
+          );
     } catch (e) {
       throw Exception(e.toString());
     }

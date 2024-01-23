@@ -20,11 +20,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
     on<ChatGetMessagesRequested>((event, emit) async {
       try {
-        var snapshots = chatService.getMessages(docId: event.docId);
-        List<Message> messages = [];
-        await for (List<Message> message in snapshots) {
-          messages.addAll(message);
-        }
+        var messages = await chatService.getMessages(docId: event.docId).first;
         emit(ChatGetMessageSucceedState(messages: messages));
       } catch (e) {
         emit(ChatGetFailedState(errorMessage: e.toString()));

@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_chatify/bloc/chat/bloc/chat_bloc.dart';
 import 'package:new_chatify/data/model/message.dart';
 import 'package:new_chatify/data/model/user_app.dart';
+import 'package:new_chatify/widget/re_chat_bubble_wdiget.dart';
+import 'package:new_chatify/widget/re_message_input_widget.dart';
 
 class ChatRoomView extends StatefulWidget {
   const ChatRoomView({super.key, required this.user});
@@ -27,8 +29,12 @@ class _ChatRoomViewState extends State<ChatRoomView> {
     docId = userIds.join("_");
     interlocutor = widget.user.email.replaceAll("@", " ");
     interlocutor = interlocutor.replaceAll(".com", "");
+  }
 
-    BlocProvider.of<ChatBloc>(context).add(
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    BlocProvider.of<ChatBloc>(context, listen: true).add(
       ChatGetMessagesRequested(
         docId: docId,
       ),
@@ -62,7 +68,6 @@ class _ChatRoomViewState extends State<ChatRoomView> {
         children: [
           BlocBuilder<ChatBloc, ChatState>(
             builder: (context, state) {
-              print(state.toString());
               if (state is ChatGetMessageLoadingState) {
                 return const Center(
                   child: CircularProgressIndicator(
@@ -78,93 +83,26 @@ class _ChatRoomViewState extends State<ChatRoomView> {
                   ),
                 );
               }
+              if (state is ChatSendMessageSucceedState) {
+                return Container();
+              }
               state as ChatGetMessageSucceedState;
               return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 34),
                 shrinkWrap: true,
                 itemCount: state.messages.length,
                 itemBuilder: (context, index) {
                   List<Message> messages = state.messages.toList();
-                  return Text(messages[index].message);
+                  return ReChatBubbleWidget(message: messages[index]);
                 },
               );
             },
           ),
-          Container(
-            margin: const EdgeInsets.all(10.0),
-            height: 47,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        width: 1.0,
-                        color: const Color(0xFFC4C4C4),
-                      ),
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            icon: const Icon(
-                              Icons.emoji_emotions,
-                              color: Color(0xFF231F20),
-                            ),
-                            onPressed: () {}),
-                        Expanded(
-                          child: TextField(
-                            controller: messageController,
-                            maxLines: 6,
-                            decoration: const InputDecoration(
-                                hintText: "Type message ....",
-                                hintStyle: TextStyle(color: Color(0xFF231F20)),
-                                border: InputBorder.none),
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.attach_file,
-                              color: Color(0xFF231F20)),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.photo_camera,
-                              color: Color(0xFF231F20)),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 5),
-                Container(
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: const BoxDecoration(
-                      color: Color(0xFF1BE096), shape: BoxShape.circle),
-                  child: InkWell(
-                    onTap: () {
-                      context.read<ChatBloc>().add(
-                            ChatSendMessagesRequested(
-                              docId: docId,
-                              message: Message(
-                                message: messageController.text.toString(),
-                                receiverId: widget.user.uid,
-                                senderId: firebaseAuth.currentUser!.uid,
-                                // creationTime: DateTime.now(),
-                              ),
-                            ),
-                          );
-                      messageController.clear();
-                    },
-                    child: const Icon(
-                      Icons.send,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-              ],
-            ),
+          ReMessageInputWidget(
+            messageController: messageController,
+            docId: docId,
+            receiverId: widget.user.uid,
+            senderId: firebaseAuth.currentUser!.uid,
           ),
         ],
       ),
