@@ -9,8 +9,12 @@ final class ChatSendMessagesRequested extends ChatEvent {
   ChatSendMessagesRequested({required this.docId, required this.message});
 }
 
-final class ChatGetMessagesRequested extends ChatEvent {
+final class ChatGetMessagesStarted extends ChatEvent {
   final String docId;
+  ChatGetMessagesStarted({required this.docId});
+}
 
-  ChatGetMessagesRequested({required this.docId});
+final class ChatGetMessagesRequsted extends ChatEvent {
+  List<Message> messages;
+  ChatGetMessagesRequsted({required this.messages});
 }

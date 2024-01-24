@@ -34,11 +34,12 @@ class _ChatRoomViewState extends State<ChatRoomView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    BlocProvider.of<ChatBloc>(context, listen: true).add(
-      ChatGetMessagesRequested(
-        docId: docId,
-      ),
-    );
+    // BlocProvider.of<ChatBloc>(context, listen: true).add(
+    //   ChatGetMessagesRequested(
+    //     docId: docId,
+    //   ),
+    // );
+    context.read<ChatBloc>().add(ChatGetMessagesStarted(docId: docId));
   }
 
   @override
@@ -68,14 +69,20 @@ class _ChatRoomViewState extends State<ChatRoomView> {
         children: [
           BlocBuilder<ChatBloc, ChatState>(
             builder: (context, state) {
-              if (state is ChatGetMessageLoadingState) {
+              if (state is ChatInitial) {
+                return Container();
+              }
+              if (state is ChatSendMessageSucceedState) {
+                return Container();
+              }
+              if (state is ChatLoadingState) {
                 return const Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF1BE096),
                   ),
                 );
               }
-              if (state is ChatGetFailedState) {
+              if (state is ChatFailedState) {
                 return Center(
                   child: Text(
                     "The error message : ${state.errorMessage}",
@@ -83,7 +90,7 @@ class _ChatRoomViewState extends State<ChatRoomView> {
                   ),
                 );
               }
-              if (state is ChatSendMessageSucceedState) {
+              if (state is ChatGetMessagesCompleteState) {
                 return Container();
               }
               state as ChatGetMessageSucceedState;

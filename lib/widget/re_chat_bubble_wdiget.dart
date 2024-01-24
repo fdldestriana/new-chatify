@@ -20,10 +20,11 @@ class ReChatBubbleWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          color: (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
-              ? const Color(0xFFDDFFEC)
-              : const Color(0xFFF0F4F9)),
+        borderRadius: BorderRadius.circular(18),
+        color: (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
+            ? const Color(0xFFDDFFEC)
+            : const Color(0xFFF0F4F9),
+      ),
       alignment: (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
           ? Alignment.centerRight
           : Alignment.centerLeft,
@@ -32,8 +33,10 @@ class ReChatBubbleWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(message.message,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                message.message,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
           Row(
