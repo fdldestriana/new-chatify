@@ -67,43 +67,46 @@ class _ChatRoomViewState extends State<ChatRoomView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          BlocBuilder<ChatBloc, ChatState>(
-            builder: (context, state) {
-              if (state is ChatInitial) {
-                return Container();
-              }
-              if (state is ChatSendMessageSucceedState) {
-                return Container();
-              }
-              if (state is ChatLoadingState) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: Color(0xFF1BE096),
-                  ),
+          Flexible(
+            flex: 1,
+            child: BlocBuilder<ChatBloc, ChatState>(
+              builder: (context, state) {
+                if (state is ChatInitial) {
+                  return Container();
+                }
+                if (state is ChatSendMessageSucceedState) {
+                  return Container();
+                }
+                if (state is ChatLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xFF1BE096),
+                    ),
+                  );
+                }
+                if (state is ChatFailedState) {
+                  return Center(
+                    child: Text(
+                      "The error message : ${state.errorMessage}",
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                }
+                if (state is ChatGetMessagesCompleteState) {
+                  return Container();
+                }
+                state as ChatGetMessageSucceedState;
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 34),
+                  shrinkWrap: true,
+                  itemCount: state.messages.length,
+                  itemBuilder: (context, index) {
+                    List<Message> messages = state.messages.toList();
+                    return ReChatBubbleWidget(message: messages[index]);
+                  },
                 );
-              }
-              if (state is ChatFailedState) {
-                return Center(
-                  child: Text(
-                    "The error message : ${state.errorMessage}",
-                    textAlign: TextAlign.center,
-                  ),
-                );
-              }
-              if (state is ChatGetMessagesCompleteState) {
-                return Container();
-              }
-              state as ChatGetMessageSucceedState;
-              return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 34),
-                shrinkWrap: true,
-                itemCount: state.messages.length,
-                itemBuilder: (context, index) {
-                  List<Message> messages = state.messages.toList();
-                  return ReChatBubbleWidget(message: messages[index]);
-                },
-              );
-            },
+              },
+            ),
           ),
           ReMessageInputWidget(
             messageController: messageController,

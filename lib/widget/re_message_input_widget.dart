@@ -21,7 +21,7 @@ class ReMessageInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10.0),
-      height: 47,
+      height: 50,
       child: Row(
         children: [
           Expanded(

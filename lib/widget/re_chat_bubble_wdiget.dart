@@ -29,25 +29,19 @@ class ReChatBubbleWidget extends StatelessWidget {
           ? Alignment.centerRight
           : Alignment.centerLeft,
       child: Column(
+        mainAxisAlignment:
+            (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                message.message,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
+          Text(
+            message.message,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, overflow: TextOverflow.visible),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                formatedTime,
-                style:
-                    TextStyle(color: const Color(0xFF000000).withOpacity(0.67)),
-              ),
-            ],
+          Text(
+            formatedTime,
+            style: TextStyle(color: const Color(0xFF000000).withOpacity(0.67)),
           )
         ],
       ),
