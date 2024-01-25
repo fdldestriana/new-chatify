@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_chatify/bloc/chat/bloc/chat_bloc.dart';
+import 'package:new_chatify/presentation/bloc/chat/bloc/chat_bloc.dart';
 import 'package:new_chatify/data/model/message.dart';
 
 class ReMessageInputWidget extends StatelessWidget {

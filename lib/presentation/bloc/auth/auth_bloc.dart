@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:new_chatify/service/auth_service.dart';
+import 'package:new_chatify/data/service/auth_service.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 

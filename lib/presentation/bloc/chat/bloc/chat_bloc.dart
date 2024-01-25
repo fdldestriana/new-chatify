@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:new_chatify/data/model/message.dart';
-import 'package:new_chatify/service/chat_service.dart';
+import 'package:new_chatify/data/service/chat_service.dart';
 part 'chat_event.dart';
 part 'chat_state.dart';
 

@@ -2,13 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_chatify/bloc/auth/auth_bloc.dart';
-import 'package:new_chatify/bloc/chat/bloc/chat_bloc.dart';
-import 'package:new_chatify/bloc/user/user_bloc.dart';
+import 'package:new_chatify/presentation/bloc/auth/auth_bloc.dart';
+import 'package:new_chatify/presentation/bloc/chat/bloc/chat_bloc.dart';
+import 'package:new_chatify/presentation/bloc/user/user_bloc.dart';
 import 'package:new_chatify/firebase_options.dart';
-import 'package:new_chatify/state_util.dart';
-import 'package:new_chatify/views/chat_room_list_view.dart';
-import 'package:new_chatify/views/signin_view.dart';
+import 'package:new_chatify/utils/state_util.dart';
+import 'package:new_chatify/presentation/views/chat_room_list_view.dart';
+import 'package:new_chatify/presentation/views/signin_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
