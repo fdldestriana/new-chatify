@@ -16,32 +16,36 @@ class ReChatBubbleWidget extends StatelessWidget {
     String formatedTime = DateFormat("hh:mm").format(time);
 
     return Container(
-      width: 30,
       padding: const EdgeInsets.all(12),
       margin: const EdgeInsets.symmetric(vertical: 10),
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width * 0.7,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         color: (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
             ? const Color(0xFFDDFFEC)
             : const Color(0xFFF0F4F9),
       ),
-      alignment: (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
-          ? Alignment.centerRight
-          : Alignment.centerLeft,
+      alignment: (message.receiverId == FirebaseAuth.instance.currentUser!.uid)
+          ? Alignment.centerLeft
+          : Alignment.centerRight,
       child: Column(
-        mainAxisAlignment:
-            (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
-                ? MainAxisAlignment.end
-                : MainAxisAlignment.start,
+        crossAxisAlignment:
+            (message.receiverId == FirebaseAuth.instance.currentUser!.uid)
+                ? CrossAxisAlignment.start
+                : CrossAxisAlignment.end,
         children: [
-          Text(
-            message.message,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, overflow: TextOverflow.visible),
-          ),
+          Text(message.message,
+              style: const TextStyle(
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.visible)),
           Text(
             formatedTime,
-            style: TextStyle(color: const Color(0xFF000000).withOpacity(0.67)),
+            style: TextStyle(
+              color: const Color(0xFF000000).withOpacity(0.67),
+            ),
           )
         ],
       ),

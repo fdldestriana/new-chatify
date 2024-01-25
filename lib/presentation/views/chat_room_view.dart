@@ -34,11 +34,6 @@ class _ChatRoomViewState extends State<ChatRoomView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // BlocProvider.of<ChatBloc>(context, listen: true).add(
-    //   ChatGetMessagesRequested(
-    //     docId: docId,
-    //   ),
-    // );
     context.read<ChatBloc>().add(ChatGetMessagesStarted(docId: docId));
   }
 
@@ -102,7 +97,15 @@ class _ChatRoomViewState extends State<ChatRoomView> {
                   itemCount: state.messages.length,
                   itemBuilder: (context, index) {
                     List<Message> messages = state.messages.toList();
-                    return ReChatBubbleWidget(message: messages[index]);
+                    return Flex(
+                        direction: Axis.horizontal,
+                        mainAxisAlignment: (messages[index].receiverId ==
+                                FirebaseAuth.instance.currentUser!.uid)
+                            ? MainAxisAlignment.start
+                            : MainAxisAlignment.end,
+                        children: [
+                          ReChatBubbleWidget(message: messages[index])
+                        ]);
                   },
                 );
               },

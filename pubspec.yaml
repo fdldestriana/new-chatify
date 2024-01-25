@@ -44,6 +44,7 @@ dependencies:
   meta: ^1.10.0
   cloud_firestore: ^4.14.0
   intl: ^0.19.0
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
