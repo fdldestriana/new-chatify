@@ -1,0 +1,15 @@
+import 'package:dartz/dartz.dart';
+import 'package:new_chatify/core/error/failures.dart';
+import 'package:new_chatify/core/usecases/usecase.dart';
+import 'package:new_chatify/features/auth/domain/repositories/auth_repository.dart';
+
+class SignOut extends UseCase<Unit, NoParams> {
+  final AuthRepository authRepository;
+
+  SignOut(this.authRepository);
+
+  @override
+  Future<Either<Failure, Unit>> call(NoParams params) async {
+    return await authRepository.signOut();
+  }
+}
