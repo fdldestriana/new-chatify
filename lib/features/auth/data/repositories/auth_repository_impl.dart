@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/features/auth/data/datasources/auth_datasource.dart';
+import 'package:new_chatify/features/auth/data/models/user_model.dart';
 import 'package:new_chatify/features/auth/domain/entities/user_entitiy.dart';
 import 'package:new_chatify/features/auth/domain/repositories/auth_repository.dart';
 
@@ -12,9 +13,9 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, UserEntity>> signIn(
       String email, String password) async {
+    late UserModel data;
     try {
-      await authDataSource.signIn(email, password);
-      return Right(_r);
+      data = await authDataSource.signIn(email, password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "invalid-email") {
         return Left(InvalidEmailFailure());
@@ -26,22 +27,27 @@ class AuthRepositoryImpl implements AuthRepository {
         return Left(WrongPasswordFailure());
       }
     } catch (e) {
-      return Left(_l);
+      return Left(UnknownFailure());
     }
+    return Right(data.toEntity());
   }
 
   @override
   Future<Either<Failure, Unit>> signOut() async {
-    try {} on FirebaseAuthException {
-    } catch (e) {}
+    try {
+      await authDataSource.signOut();
+      return Right(Unit as Unit);
+    } catch (e) {
+      return Left(UnknownFailure());
+    }
   }
 
   @override
   Future<Either<Failure, UserEntity>> signUp(
       String email, String password) async {
+    late UserModel data;
     try {
-      await authDataSource.signUp(email, password);
-      return Right(_r);
+      data = await authDataSource.signUp(email, password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
         return Left(EmailAlreadyInUseFailure());
@@ -53,7 +59,8 @@ class AuthRepositoryImpl implements AuthRepository {
         return Left(WeakPasswordFailure());
       }
     } catch (e) {
-      return Left(_l);
+      return Left(UnknownFailure());
     }
+    return Right(data.toEntity());
   }
 }

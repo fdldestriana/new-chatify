@@ -1,9 +1,10 @@
-class UserModel {
-  final String uid;
-  final String email;
-  final String password;
+import 'package:new_chatify/features/auth/domain/entities/user_entitiy.dart';
 
-  UserModel({required this.uid, required this.email, required this.password});
+class UserModel extends UserEntity {
+  @override
+  UserModel(
+      {required String uid, required String email, required String password})
+      : super(uid: uid, email: email, password: password);
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
@@ -11,5 +12,8 @@ class UserModel {
       email: map["email"],
       password: map["password"],
     );
+  }
+  UserEntity toEntity() {
+    return UserEntity(uid: uid, email: email, password: password);
   }
 }

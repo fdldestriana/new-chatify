@@ -4,10 +4,10 @@ import 'package:new_chatify/core/usecases/usecase.dart';
 import 'package:new_chatify/features/auth/domain/entities/user_entitiy.dart';
 import 'package:new_chatify/features/auth/domain/repositories/auth_repository.dart';
 
-class SignIn extends UseCase<UserEntity, Params> {
+class SignInUseCase extends UseCase<UserEntity, Params> {
   final AuthRepository authRepository;
 
-  SignIn(this.authRepository);
+  SignInUseCase(this.authRepository);
 
   @override
   Future<Either<Failure, UserEntity>> call(Params params) async {

@@ -13,3 +13,5 @@ class EmailAlreadyInUseFailure extends Failure {}
 class OperationNotAllowedFailure extends Failure {}
 
 class WeakPasswordFailure extends Failure {}
+
+class UnknownFailure extends Failure {}
