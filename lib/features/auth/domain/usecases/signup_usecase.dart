@@ -5,13 +5,13 @@ import 'package:new_chatify/features/auth/domain/entities/user_entitiy.dart';
 import 'package:new_chatify/features/auth/domain/repositories/auth_repository.dart';
 
 class SignUpUseCase extends UseCase<UserEntity, Params> {
-  final AuthRepository _authRepository;
+  final AuthRepository authRepository;
 
-  SignUpUseCase(this._authRepository);
+  SignUpUseCase({required this.authRepository});
 
   @override
   Future<Either<Failure, UserEntity>> call(Params params) async {
-    return await _authRepository.signUp(params.email, params.password);
+    return await authRepository.signUp(params.email, params.password);
   }
 }
 

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_chatify/presentation/bloc/auth/auth_bloc.dart';
-import 'package:new_chatify/utils/state_util.dart';
+import 'package:new_chatify/features/auth/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:new_chatify/features/auth/presentation/pages/signin_view.dart';
+import 'package:new_chatify/features/auth/presentation/widgets/re_bottotextauthscreen_widget.dart';
+import 'package:new_chatify/features/auth/presentation/widgets/re_button_widget.dart';
+import 'package:new_chatify/core/utils/state_util.dart';
 import 'package:new_chatify/presentation/views/chat_room_list_view.dart';
-import 'package:new_chatify/presentation/views/signup_view.dart';
-import 'package:new_chatify/presentation/widget/re_bottotextauthscreen_widget.dart';
-import 'package:new_chatify/presentation/widget/re_button_widget.dart';
-import 'package:new_chatify/presentation/widget/re_logo_widget.dart';
-import 'package:new_chatify/presentation/widget/re_notloggedin_widget.dart';
-import 'package:new_chatify/presentation/widget/re_remember_widget.dart';
-import 'package:new_chatify/presentation/widget/re_textformfield_widget.dart';
+import 'package:new_chatify/features/auth/presentation/widgets/re_logo_widget.dart';
+import 'package:new_chatify/features/auth/presentation/widgets/re_notloggedin_widget.dart';
+import 'package:new_chatify/features/auth/presentation/widgets/re_remember_widget.dart';
+import 'package:new_chatify/features/auth/presentation/widgets/re_textformfield_widget.dart';
 
-class SigninView extends StatefulWidget {
-  const SigninView({super.key});
+class SignupView extends StatefulWidget {
+  const SignupView({super.key});
 
   @override
-  State<SigninView> createState() => _SigninViewState();
+  State<SignupView> createState() => _SignupViewState();
 }
 
-class _SigninViewState extends State<SigninView> {
+class _SignupViewState extends State<SignupView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -70,7 +70,7 @@ class _SigninViewState extends State<SigninView> {
               children: [
                 SizedBox(height: Get.height * 0.10),
                 const ReLogoWidget(),
-                const ReNotLoggedInWidget(title: "Sign in to your Account"),
+                const ReNotLoggedInWidget(title: "Sign up for free"),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.11),
                   child: Column(
@@ -98,11 +98,11 @@ class _SigninViewState extends State<SigninView> {
                       const ReRememberWidget(),
                       SizedBox(height: Get.height * 0.03),
                       ReButtonWidget(
-                        title: "Sign in",
+                        title: "Sign up",
                         width: Get.width * 0.77,
                         height: Get.height * 0.06,
                         onPressed: () => context.read<AuthBloc>().add(
-                              AuthSigninRequested(
+                              AuthSignupRequested(
                                 email: _emailController.text,
                                 password: _passwordController.text,
                               ),
@@ -110,12 +110,12 @@ class _SigninViewState extends State<SigninView> {
                       ),
                       SizedBox(height: Get.height * 0.06),
                       ReBottomTextAuthScreenWidget(
-                        text: "Did you have an account? ",
-                        title: "Sign up",
+                        text: "Already have an Account? ",
+                        title: "Sign in",
                         onTap: () => Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SignupView()),
+                                builder: (context) => const SigninView()),
                             (route) => false),
                       )
                     ],

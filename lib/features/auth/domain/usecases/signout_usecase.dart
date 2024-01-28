@@ -6,7 +6,7 @@ import 'package:new_chatify/features/auth/domain/repositories/auth_repository.da
 class SignOutUseCase extends UseCase<Unit, NoParams> {
   final AuthRepository authRepository;
 
-  SignOutUseCase(this.authRepository);
+  SignOutUseCase({required this.authRepository});
 
   @override
   Future<Either<Failure, Unit>> call(NoParams params) async {

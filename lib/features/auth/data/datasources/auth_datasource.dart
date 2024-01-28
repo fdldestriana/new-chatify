@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:new_chatify/core/error/exception.dart';
 import 'package:new_chatify/features/auth/data/models/user_model.dart';
 
 abstract class AuthDataSource {
@@ -23,14 +24,15 @@ class AuthDataSourceImpl implements AuthDataSource {
         "email": userCredential.user!.email
       }, SetOptions(merge: true));
     } on FirebaseAuthException catch (e) {
-      if (e.code == "invalid-email") {
-        throw Exception("The email is invalid");
-      } else if (e.code == "user-disabled") {
-        throw Exception("The user is disabled");
-      } else if (e.code == "user-not-found") {
-        throw Exception("The user is not found");
-      } else if (e.code == "wrong-password") {
-        throw Exception("The password is wrong");
+      switch (e.code) {
+        case "invalid-email":
+          throw InvalidEmailException(errorMessage: "The email is invalid");
+        case "user-disabled":
+          throw UserDisabledException(errorMessage: "The user is disabled");
+        case "user-not-found":
+          throw UserNotFoundException(errorMessage: "The user is not found");
+        case "wrong-password":
+          throw WrongPasswordException(errorMessage: "The password is wrong");
       }
     } catch (e) {
       throw Exception(e.toString());
@@ -63,14 +65,17 @@ class AuthDataSourceImpl implements AuthDataSource {
         {"uid": userCredential.user!.uid, "email": userCredential.user!.email},
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == "email-already-in-use") {
-        throw Exception("The email was used for another user");
-      } else if (e.code == "invalid-email") {
-        throw Exception("Email is invalid");
-      } else if (e.code == "operation-not-allowed:") {
-        throw Exception("This requested is not allowed");
-      } else if (e.code == "weak-password") {
-        throw Exception("Password is weak");
+      switch (e.code) {
+        case "email-already-in-use":
+          throw EmailAlreadyInUseException(
+              errorMessage: "The email was used for another user");
+        case "invalid-email":
+          throw InvalidEmailException(errorMessage: "Email is invalid");
+        case "operation-not-allowed:":
+          throw OperationNotAllowedException(
+              errorMessage: "This requested is not allowed");
+        case "weak-password":
+          throw WeakPasswordException(errorMessage: "Password is weak");
       }
     } catch (e) {
       throw Exception(e.toString());

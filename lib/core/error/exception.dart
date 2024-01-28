@@ -1,35 +1,79 @@
-// import 'package:firebase_auth/firebase_auth.dart';
+class InvalidEmailException implements Exception {
+  final String errorMessage;
+  InvalidEmailException({required this.errorMessage});
 
-// class InvalidException implements FirebaseAuthException {
-//   @override
-//   // TODO: implement code
-//   String get code => throw UnimplementedError();
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
 
-//   @override
-//   // TODO: implement credential
-//   AuthCredential? get credential => throw UnimplementedError();
+class UserDisabledException implements Exception {
+  final String errorMessage;
+  UserDisabledException({required this.errorMessage});
 
-//   @override
-//   // TODO: implement email
-//   String? get email => throw UnimplementedError();
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
 
-//   @override
-//   // TODO: implement message
-//   String? get message => throw UnimplementedError();
+class UserNotFoundException implements Exception {
+  final String errorMessage;
+  UserNotFoundException({required this.errorMessage});
 
-//   @override
-//   // TODO: implement phoneNumber
-//   String? get phoneNumber => throw UnimplementedError();
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
 
-//   @override
-//   // TODO: implement plugin
-//   String get plugin => throw UnimplementedError();
+class WrongPasswordException implements Exception {
+  final String errorMessage;
+  WrongPasswordException({required this.errorMessage});
 
-//   @override
-//   // TODO: implement stackTrace
-//   StackTrace? get stackTrace => throw UnimplementedError();
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
 
-//   @override
-//   // TODO: implement tenantId
-//   String? get tenantId => throw UnimplementedError();
-// }
+class EmailAlreadyInUseException implements Exception {
+  final String errorMessage;
+  EmailAlreadyInUseException({required this.errorMessage});
+
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
+
+class OperationNotAllowedException implements Exception {
+  final String errorMessage;
+  OperationNotAllowedException({required this.errorMessage});
+
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
+
+class WeakPasswordException implements Exception {
+  final String errorMessage;
+  WeakPasswordException({required this.errorMessage});
+
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
+
+class UnknownException implements Exception {
+  final String errorMessage;
+  UnknownException({required this.errorMessage});
+
+  @override
+  String toString() {
+    return errorMessage;
+  }
+}
