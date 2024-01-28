@@ -20,7 +20,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInUseCase signInUseCase;
   final SignOutUseCase signOutUseCase;
 
-  AuthBloc(this.signUpUseCase, this.signInUseCase, this.signOutUseCase)
+  AuthBloc(
+      {required this.signUpUseCase,
+      required this.signInUseCase,
+      required this.signOutUseCase})
       : super(AuthInitial()) {
     on<AuthSignupRequested>(
       (event, emit) async {
@@ -29,7 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           signup_usecase.Params(email: event.email, password: event.password),
         );
         userCred.fold(
-            (l) => emit(const AuthFailedState(errorMessage: "errorMessage")),
+            (l) => emit(AuthFailedState(errorMessage: l.errorMessage)),
             (r) => emit(AuthSucceedState(email: r.email)));
       },
     );
@@ -41,7 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           signin_usecase.Params(email: event.email, password: event.password),
         );
         userCred.fold(
-            (l) => emit(const AuthFailedState(errorMessage: "errorMessage")),
+            (l) => emit(AuthFailedState(errorMessage: l.errorMessage)),
             (r) => emit(AuthSucceedState(email: r.email)));
       },
     );

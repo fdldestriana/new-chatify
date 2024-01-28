@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_chatify/utils/state_util.dart';
+import 'package:new_chatify/core/utils/state_util.dart';
 
 class ReTextFormFieldWidget extends StatelessWidget {
   const ReTextFormFieldWidget(

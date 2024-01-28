@@ -5,14 +5,12 @@ import 'package:new_chatify/data/model/message.dart';
 
 class ReChatBubbleWidget extends StatelessWidget {
   const ReChatBubbleWidget({super.key, required this.message});
-
   final Message message;
 
   @override
   Widget build(BuildContext context) {
-    DateTime time = DateTime.parse(DateTime.fromMillisecondsSinceEpoch(
-      message.timestamp.microsecondsSinceEpoch,
-    ).toString());
+    DateTime time = (message.timestamp).toDate();
+
     String formatedTime = DateFormat("hh:mm").format(time);
 
     return Container(

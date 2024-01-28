@@ -1,17 +1,37 @@
-abstract class Failure {}
+abstract class Failure {
+  final String errorMessage;
 
-class InvalidEmailFailure extends Failure {}
+  Failure({required this.errorMessage});
+}
 
-class UserDisabledFailure extends Failure {}
+class InvalidEmailFailure extends Failure {
+  InvalidEmailFailure({required super.errorMessage});
+}
 
-class UserNotFoundFailure extends Failure {}
+class UserDisabledFailure extends Failure {
+  UserDisabledFailure({required super.errorMessage});
+}
 
-class WrongPasswordFailure extends Failure {}
+class UserNotFoundFailure extends Failure {
+  UserNotFoundFailure({required super.errorMessage});
+}
 
-class EmailAlreadyInUseFailure extends Failure {}
+class WrongPasswordFailure extends Failure {
+  WrongPasswordFailure({required super.errorMessage});
+}
 
-class OperationNotAllowedFailure extends Failure {}
+class EmailAlreadyInUseFailure extends Failure {
+  EmailAlreadyInUseFailure({required super.errorMessage});
+}
 
-class WeakPasswordFailure extends Failure {}
+class OperationNotAllowedFailure extends Failure {
+  OperationNotAllowedFailure({required super.errorMessage});
+}
 
-class UnknownFailure extends Failure {}
+class WeakPasswordFailure extends Failure {
+  WeakPasswordFailure({required super.errorMessage});
+}
+
+class UnknownFailure extends Failure {
+  UnknownFailure({required super.errorMessage});
+}

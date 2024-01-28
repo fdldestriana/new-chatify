@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_chatify/utils/state_util.dart';
+import 'package:new_chatify/core/utils/state_util.dart';
 
 class ReNotLoggedInWidget extends StatelessWidget {
   const ReNotLoggedInWidget({super.key, required this.title});

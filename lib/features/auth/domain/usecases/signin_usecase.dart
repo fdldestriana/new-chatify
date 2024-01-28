@@ -7,7 +7,7 @@ import 'package:new_chatify/features/auth/domain/repositories/auth_repository.da
 class SignInUseCase extends UseCase<UserEntity, Params> {
   final AuthRepository authRepository;
 
-  SignInUseCase(this.authRepository);
+  SignInUseCase({required this.authRepository});
 
   @override
   Future<Either<Failure, UserEntity>> call(Params params) async {
