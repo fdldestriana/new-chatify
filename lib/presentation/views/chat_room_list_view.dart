@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_chatify/features/auth/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:new_chatify/features/auth/presentation/pages/signin_view.dart';
+import 'package:new_chatify/presentation-on-working/auth/bloc/bloc/auth_bloc.dart';
+import 'package:new_chatify/presentation-on-working/auth/pages/signin_view.dart';
 import 'package:new_chatify/presentation/bloc/user/user_bloc.dart';
 import 'package:new_chatify/data/model/user_app.dart';
 import 'package:new_chatify/presentation/views/chat_room_view.dart';

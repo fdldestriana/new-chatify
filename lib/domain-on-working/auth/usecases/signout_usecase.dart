@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/core/usecases/usecase.dart';
-import 'package:new_chatify/features/auth/domain/repositories/auth_repository.dart';
+import 'package:new_chatify/domain-on-working/auth/repositories/auth_repository.dart';
 
 class SignOutUseCase extends UseCase<Unit, NoParams> {
   final AuthRepository authRepository;

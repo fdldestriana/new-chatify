@@ -3,13 +3,13 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/core/usecases/usecase.dart';
-import 'package:new_chatify/features/auth/domain/entities/user_entitiy.dart';
-import 'package:new_chatify/features/auth/domain/usecases/signin_usecase.dart';
-import 'package:new_chatify/features/auth/domain/usecases/signout_usecase.dart';
-import 'package:new_chatify/features/auth/domain/usecases/signup_usecase.dart';
-import 'package:new_chatify/features/auth/domain/usecases/signup_usecase.dart'
+import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart';
+import 'package:new_chatify/domain-on-working/auth/usecases/signin_usecase.dart';
+import 'package:new_chatify/domain-on-working/auth/usecases/signout_usecase.dart';
+import 'package:new_chatify/domain-on-working/auth/usecases/signup_usecase.dart';
+import 'package:new_chatify/domain-on-working/auth/usecases/signup_usecase.dart'
     as signup_usecase;
-import 'package:new_chatify/features/auth/domain/usecases/signin_usecase.dart'
+import 'package:new_chatify/domain-on-working/auth/usecases/signin_usecase.dart'
     as signin_usecase;
 
 part 'auth_event.dart';

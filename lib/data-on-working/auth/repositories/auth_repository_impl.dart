@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/exception.dart';
 import 'package:new_chatify/core/error/failures.dart';
-import 'package:new_chatify/features/auth/data/datasources/auth_datasource.dart';
-import 'package:new_chatify/features/auth/data/models/user_model.dart';
-import 'package:new_chatify/features/auth/domain/entities/user_entitiy.dart';
-import 'package:new_chatify/features/auth/domain/repositories/auth_repository.dart';
+import 'package:new_chatify/data-on-working/auth/datasources/auth_datasource.dart';
+import 'package:new_chatify/data-on-working/auth/models/user_model.dart';
+import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart';
+import 'package:new_chatify/domain-on-working/auth/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthDataSource authDataSource;

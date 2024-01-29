@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_chatify/core/error/exception.dart';
-import 'package:new_chatify/features/auth/data/models/user_model.dart';
+import 'package:new_chatify/data-on-working/auth/models/user_model.dart';
 
 abstract class AuthDataSource {
   Future<UserModel> signUp(String email, String password);

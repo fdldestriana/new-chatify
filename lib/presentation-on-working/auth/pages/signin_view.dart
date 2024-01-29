@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_chatify/features/auth/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:new_chatify/features/auth/presentation/pages/signup_view.dart';
-import 'package:new_chatify/features/auth/presentation/widgets/re_bottotextauthscreen_widget.dart';
-import 'package:new_chatify/features/auth/presentation/widgets/re_button_widget.dart';
 import 'package:new_chatify/core/utils/state_util.dart';
+import 'package:new_chatify/presentation-on-working/auth/bloc/bloc/auth_bloc.dart';
+import 'package:new_chatify/presentation-on-working/auth/pages/signup_view.dart';
+import 'package:new_chatify/presentation-on-working/auth/widgets/re_bottotextauthscreen_widget.dart';
+import 'package:new_chatify/presentation-on-working/auth/widgets/re_button_widget.dart';
+import 'package:new_chatify/presentation-on-working/auth/widgets/re_logo_widget.dart';
+import 'package:new_chatify/presentation-on-working/auth/widgets/re_notloggedin_widget.dart';
+import 'package:new_chatify/presentation-on-working/auth/widgets/re_remember_widget.dart';
+import 'package:new_chatify/presentation-on-working/auth/widgets/re_textformfield_widget.dart';
 import 'package:new_chatify/presentation/views/chat_room_list_view.dart';
-import 'package:new_chatify/features/auth/presentation/widgets/re_logo_widget.dart';
-import 'package:new_chatify/features/auth/presentation/widgets/re_notloggedin_widget.dart';
-import 'package:new_chatify/features/auth/presentation/widgets/re_remember_widget.dart';
-import 'package:new_chatify/features/auth/presentation/widgets/re_textformfield_widget.dart';
 
 class SigninView extends StatefulWidget {
   const SigninView({super.key});

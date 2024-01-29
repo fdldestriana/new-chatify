@@ -1,4 +1,4 @@
-import 'package:new_chatify/features/auth/domain/entities/user_entitiy.dart';
+import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart';
 
 class UserModel extends UserEntity {
   @override
