@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/exception.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/data-on-working/auth/datasources/auth_datasource.dart';
-import 'package:new_chatify/data-on-working/auth/models/user_model.dart';
+import 'package:new_chatify/data-on-working/shared/models/user_model.dart';
 import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/domain-on-working/auth/repositories/auth_repository.dart';
 
@@ -11,9 +11,9 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.authDataSource});
 
   @override
-  Future<Either<Failure, UserEntity>> signIn(
+  Future<Either<Failure, UserAppEntity>> signIn(
       String email, String password) async {
-    late UserModel data;
+    late UserAppModel data;
     try {
       data = await authDataSource.signIn(email, password);
     } catch (e) {
@@ -44,9 +44,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signUp(
+  Future<Either<Failure, UserAppEntity>> signUp(
       String email, String password) async {
-    late UserModel data;
+    late UserAppModel data;
     try {
       data = await authDataSource.signUp(email, password);
     } catch (e) {

@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/bloc/chat/bloc/chat_bloc.dart';
 import 'package:new_chatify/data/model/message.dart';
-import 'package:new_chatify/data/model/user_app.dart';
 import 'package:new_chatify/presentation/widget/re_chat_bubble_wdiget.dart';
 import 'package:new_chatify/presentation/widget/re_message_input_widget.dart';
 
 class ChatRoomView extends StatefulWidget {
   const ChatRoomView({super.key, required this.user});
-  final UserApp user;
+  final UserAppEntity user;
 
   @override
   State<ChatRoomView> createState() => _ChatRoomViewState();

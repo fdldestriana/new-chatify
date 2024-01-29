@@ -10,7 +10,7 @@ import 'package:new_chatify/presentation-on-working/auth/widgets/re_logo_widget.
 import 'package:new_chatify/presentation-on-working/auth/widgets/re_notloggedin_widget.dart';
 import 'package:new_chatify/presentation-on-working/auth/widgets/re_remember_widget.dart';
 import 'package:new_chatify/presentation-on-working/auth/widgets/re_textformfield_widget.dart';
-import 'package:new_chatify/presentation/views/chat_room_list_view.dart';
+import 'package:new_chatify/presentation-on-working/userlist/pages/userlist_view.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -45,7 +45,7 @@ class _SignupViewState extends State<SignupView> {
           if (state is AuthSucceedState) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
               builder: (_) {
-                return const ChatRoomListView(
+                return const UserListView(
                     // email: state.email.toString(),
                     );
               },

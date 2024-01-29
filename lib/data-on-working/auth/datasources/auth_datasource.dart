@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_chatify/core/error/exception.dart';
-import 'package:new_chatify/data-on-working/auth/models/user_model.dart';
+import 'package:new_chatify/data-on-working/shared/models/user_model.dart';
 
 abstract class AuthDataSource {
-  Future<UserModel> signUp(String email, String password);
-  Future<UserModel> signIn(String email, String password);
+  Future<UserAppModel> signUp(String email, String password);
+  Future<UserAppModel> signIn(String email, String password);
   Future<void> signOut();
 }
 
@@ -14,7 +14,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   @override
-  Future<UserModel> signIn(String email, String password) async {
+  Future<UserAppModel> signIn(String email, String password) async {
     late UserCredential userCredential;
     try {
       userCredential = await firebaseAuth.signInWithEmailAndPassword(
@@ -37,11 +37,10 @@ class AuthDataSourceImpl implements AuthDataSource {
     } catch (e) {
       throw Exception(e.toString());
     }
-    return UserModel.fromMap(
+    return UserAppModel.fromMap(
       {
         "uid": userCredential.user!.uid,
         "email": userCredential.user!.email,
-        "password": "",
       },
     );
   }
@@ -56,7 +55,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  Future<UserModel> signUp(String email, String password) async {
+  Future<UserAppModel> signUp(String email, String password) async {
     late UserCredential userCredential;
     try {
       userCredential = await firebaseAuth.createUserWithEmailAndPassword(
@@ -80,11 +79,10 @@ class AuthDataSourceImpl implements AuthDataSource {
     } catch (e) {
       throw Exception(e.toString());
     }
-    return UserModel.fromMap(
+    return UserAppModel.fromMap(
       {
         "uid": userCredential.user!.uid,
         "email": userCredential.user!.email,
-        "password": "",
       },
     );
   }

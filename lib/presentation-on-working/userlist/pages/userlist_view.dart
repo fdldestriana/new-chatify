@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation-on-working/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation-on-working/auth/pages/signin_view.dart';
-import 'package:new_chatify/presentation/bloc/user/user_bloc.dart';
-import 'package:new_chatify/data/model/user_app.dart';
+import 'package:new_chatify/presentation-on-working/userlist/bloc/userlist_bloc.dart';
 import 'package:new_chatify/presentation/views/chat_room_view.dart';
 
-class ChatRoomListView extends StatefulWidget {
-  const ChatRoomListView({super.key});
+class UserListView extends StatefulWidget {
+  const UserListView({super.key});
 
   @override
-  State<ChatRoomListView> createState() => _ChatRoomListViewState();
+  State<UserListView> createState() => _UserListViewState();
 }
 
-class _ChatRoomListViewState extends State<ChatRoomListView> {
+class _UserListViewState extends State<UserListView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UserBloc>(context).add(UsersLoadRequested());
+    BlocProvider.of<UserlistBloc>(context).add(UsersListLoadRequested());
   }
 
   @override
@@ -55,13 +55,13 @@ class _ChatRoomListViewState extends State<ChatRoomListView> {
               fontWeight: FontWeight.bold),
         ),
       ),
-      body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-        if (state is UserLoadingState) {
+      body: BlocBuilder<UserlistBloc, UserlistState>(builder: (context, state) {
+        if (state is UserlistLoadingState || state is UserlistInitial) {
           return const Center(
             child: CircularProgressIndicator(color: Color(0xFF31C48D)),
           );
         }
-        if (state is UserLoadFailedState) {
+        if (state is UserlistLoadFailedState) {
           return Center(
             child: Text(
               state.errorMessage,
@@ -69,7 +69,7 @@ class _ChatRoomListViewState extends State<ChatRoomListView> {
             ),
           );
         }
-        state as UsersLoadSucceedState;
+        state as UserlistLoadSucceedState;
         return ListView.builder(
           itemCount: state.users.length,
           itemBuilder: (BuildContext context, int index) {
@@ -79,9 +79,10 @@ class _ChatRoomListViewState extends State<ChatRoomListView> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ChatRoomView(
-                      user: UserApp(
-                          uid: state.users[index].uid,
-                          email: state.users[index].email),
+                      user: UserAppEntity(
+                        uid: state.users[index].uid,
+                        email: state.users[index].email,
+                      ),
                     ),
                   ),
                 );

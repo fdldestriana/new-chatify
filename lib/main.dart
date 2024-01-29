@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_chatify/injection_container.dart';
 import 'package:new_chatify/presentation-on-working/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation-on-working/auth/pages/signin_view.dart';
+import 'package:new_chatify/presentation-on-working/userlist/bloc/userlist_bloc.dart';
+import 'package:new_chatify/presentation-on-working/userlist/pages/userlist_view.dart';
 import 'package:new_chatify/presentation/bloc/chat/bloc/chat_bloc.dart';
-import 'package:new_chatify/presentation/bloc/user/user_bloc.dart';
 import 'package:new_chatify/firebase_options.dart';
-import 'package:new_chatify/presentation/views/chat_room_list_view.dart';
 import 'package:new_chatify/core/utils/state_util.dart';
 import 'injection_container.dart' as di;
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => sl<AuthBloc>()),
         BlocProvider(create: (_) => ChatBloc()),
-        BlocProvider(create: (_) => UserBloc()),
+        BlocProvider(create: (_) => sl<UserlistBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
         home: (FirebaseAuth.instance.currentUser == null)
             ? const SigninView()
-            : const ChatRoomListView(),
+            : const UserListView(),
         navigatorKey: Get.navigatorKey,
       ),
     );

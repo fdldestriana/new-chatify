@@ -28,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignupRequested>(
       (event, emit) async {
         emit(AuthLoadingState());
-        Either<Failure, UserEntity> userCred = await signUpUseCase.call(
+        Either<Failure, UserAppEntity> userCred = await signUpUseCase.call(
           signup_usecase.Params(email: event.email, password: event.password),
         );
         userCred.fold(
@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSigninRequested>(
       (event, emit) async {
         emit(AuthLoadingState());
-        Either<Failure, UserEntity> userCred = await signInUseCase.call(
+        Either<Failure, UserAppEntity> userCred = await signInUseCase.call(
           signin_usecase.Params(email: event.email, password: event.password),
         );
         userCred.fold(
