@@ -4,13 +4,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_chatify/injection_container.dart';
-import 'package:new_chatify/presentation-on-working/auth/bloc/bloc/auth_bloc.dart';
-import 'package:new_chatify/presentation-on-working/auth/pages/signin_view.dart';
-import 'package:new_chatify/presentation-on-working/userlist/bloc/userlist_bloc.dart';
-import 'package:new_chatify/presentation-on-working/userlist/pages/userlist_view.dart';
-import 'package:new_chatify/presentation/bloc/chat/bloc/chat_bloc.dart';
 import 'package:new_chatify/firebase_options.dart';
 import 'package:new_chatify/core/utils/state_util.dart';
+import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
+import 'package:new_chatify/presentation/auth/pages/signin_view.dart';
+import 'package:new_chatify/presentation/chat/bloc/chat_bloc.dart';
+import 'package:new_chatify/presentation/userlist/bloc/userlist_bloc.dart';
+import 'package:new_chatify/presentation/userlist/pages/userlist_view.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<AuthBloc>()),
-        BlocProvider(create: (_) => ChatBloc()),
+        BlocProvider(create: (_) => sl<ChatBloc>()),
         BlocProvider(create: (_) => sl<UserlistBloc>()),
       ],
       child: MaterialApp(
