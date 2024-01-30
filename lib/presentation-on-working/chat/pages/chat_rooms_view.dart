@@ -1,21 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_chatify/domain-on-working/chat/entities/message_entity.dart';
 import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart';
-import 'package:new_chatify/presentation/bloc/chat/bloc/chat_bloc.dart';
-import 'package:new_chatify/data/model/message.dart';
-import 'package:new_chatify/presentation/widget/re_chat_bubble_wdiget.dart';
-import 'package:new_chatify/presentation/widget/re_message_input_widget.dart';
+import 'package:new_chatify/presentation-on-working/chat/bloc/chat_bloc.dart';
+import 'package:new_chatify/presentation-on-working/chat/widgets/re_chat_bubble_wdiget.dart';
+import 'package:new_chatify/presentation-on-working/chat/widgets/re_message_input_widget.dart';
 
-class ChatRoomView extends StatefulWidget {
-  const ChatRoomView({super.key, required this.user});
+class ChatRoomsView extends StatefulWidget {
+  const ChatRoomsView({super.key, required this.user});
   final UserAppEntity user;
 
   @override
-  State<ChatRoomView> createState() => _ChatRoomViewState();
+  State<ChatRoomsView> createState() => _ChatRoomsViewState();
 }
 
-class _ChatRoomViewState extends State<ChatRoomView> {
+class _ChatRoomsViewState extends State<ChatRoomsView> {
   TextEditingController messageController = TextEditingController();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   late String interlocutor;
@@ -96,7 +96,7 @@ class _ChatRoomViewState extends State<ChatRoomView> {
                   shrinkWrap: true,
                   itemCount: state.messages.length,
                   itemBuilder: (context, index) {
-                    List<Message> messages = state.messages.toList();
+                    List<MessageEntity> messages = state.messages.toList();
                     return Flex(
                         direction: Axis.horizontal,
                         mainAxisAlignment: (messages[index].receiverId ==
@@ -104,7 +104,7 @@ class _ChatRoomViewState extends State<ChatRoomView> {
                             ? MainAxisAlignment.start
                             : MainAxisAlignment.end,
                         children: [
-                          ReChatBubbleWidget(message: messages[index])
+                          ReChatBubbleWidget(messageEntity: messages[index])
                         ]);
                   },
                 );

@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:new_chatify/data/model/message.dart';
+import 'package:new_chatify/domain-on-working/chat/entities/message_entity.dart';
 
 class ReChatBubbleWidget extends StatelessWidget {
-  const ReChatBubbleWidget({super.key, required this.message});
-  final Message message;
+  const ReChatBubbleWidget({super.key, required this.messageEntity});
+  final MessageEntity messageEntity;
 
   @override
   Widget build(BuildContext context) {
-    DateTime time = (message.timestamp).toDate();
+    DateTime time = (messageEntity.timestamp).toDate();
 
     String formatedTime = DateFormat("hh:mm").format(time);
 
@@ -21,20 +21,22 @@ class ReChatBubbleWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        color: (message.receiverId != FirebaseAuth.instance.currentUser!.uid)
-            ? const Color(0xFFDDFFEC)
-            : const Color(0xFFF0F4F9),
+        color:
+            (messageEntity.receiverId != FirebaseAuth.instance.currentUser!.uid)
+                ? const Color(0xFFDDFFEC)
+                : const Color(0xFFF0F4F9),
       ),
-      alignment: (message.receiverId == FirebaseAuth.instance.currentUser!.uid)
-          ? Alignment.centerLeft
-          : Alignment.centerRight,
+      alignment:
+          (messageEntity.receiverId == FirebaseAuth.instance.currentUser!.uid)
+              ? Alignment.centerLeft
+              : Alignment.centerRight,
       child: Column(
         crossAxisAlignment:
-            (message.receiverId == FirebaseAuth.instance.currentUser!.uid)
+            (messageEntity.receiverId == FirebaseAuth.instance.currentUser!.uid)
                 ? CrossAxisAlignment.start
                 : CrossAxisAlignment.end,
         children: [
-          Text(message.message,
+          Text(messageEntity.message,
               style: const TextStyle(
                   color: Color(0xFF000000),
                   fontWeight: FontWeight.bold,

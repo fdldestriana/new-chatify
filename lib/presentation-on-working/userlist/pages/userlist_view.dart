@@ -5,7 +5,7 @@ import 'package:new_chatify/domain-on-working/shared/entities/user_entitiy.dart'
 import 'package:new_chatify/presentation-on-working/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation-on-working/auth/pages/signin_view.dart';
 import 'package:new_chatify/presentation-on-working/userlist/bloc/userlist_bloc.dart';
-import 'package:new_chatify/presentation/views/chat_room_view.dart';
+import 'package:new_chatify/presentation-on-working/chat/pages/chat_rooms_view.dart';
 
 class UserListView extends StatefulWidget {
   const UserListView({super.key});
@@ -78,7 +78,7 @@ class _UserListViewState extends State<UserListView> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChatRoomView(
+                    builder: (context) => ChatRoomsView(
                       user: UserAppEntity(
                         uid: state.users[index].uid,
                         email: state.users[index].email,

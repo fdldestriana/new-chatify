@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_chatify/presentation/bloc/chat/bloc/chat_bloc.dart';
-import 'package:new_chatify/data/model/message.dart';
+import 'package:new_chatify/domain-on-working/chat/entities/message_entity.dart';
+import 'package:new_chatify/presentation-on-working/chat/bloc/chat_bloc.dart';
 
 class ReMessageInputWidget extends StatelessWidget {
   const ReMessageInputWidget(
@@ -77,7 +77,7 @@ class ReMessageInputWidget extends StatelessWidget {
                 context.read<ChatBloc>().add(
                       ChatSendMessagesRequested(
                         docId: docId,
-                        message: Message(
+                        message: MessageEntity(
                           message: messageController.text.toString(),
                           receiverId: receiverId,
                           senderId: senderId,
