@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:new_chatify/data/chat/models/message_model.dart';
+import 'package:new_chatify/data/shared/models/message_model.dart';
 
 abstract class ChatDataSource {
   Future<void> sendMessage(String docId, Map<String, dynamic> message);

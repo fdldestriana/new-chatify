@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:new_chatify/domain/chat/entities/message_entity.dart';
+import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 import 'package:new_chatify/domain/chat/usecases/get_message_usecase.dart';
 import 'package:new_chatify/domain/chat/usecases/send_message_usecase.dart';
 import 'package:new_chatify/domain/chat/usecases/get_message_usecase.dart'

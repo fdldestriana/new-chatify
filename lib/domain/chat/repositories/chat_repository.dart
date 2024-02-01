@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/failures.dart';
-import 'package:new_chatify/domain/chat/entities/message_entity.dart';
+import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 
 abstract class ChatRepository {
   Future<Either<Failure, Unit>> sendMessage(

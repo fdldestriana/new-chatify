@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/data/chat/datasources/chat_datasource.dart';
-import 'package:new_chatify/data/chat/models/message_model.dart';
+import 'package:new_chatify/data/shared/models/message_model.dart';
 import 'package:new_chatify/domain/chat/repositories/chat_repository.dart';
 
 class ChatRepositoryImpl implements ChatRepository {

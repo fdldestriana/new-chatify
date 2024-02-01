@@ -1,4 +1,4 @@
-import 'package:new_chatify/domain/chat/entities/message_entity.dart';
+import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 
 class MessageModel extends MessageEntity {
   MessageModel({

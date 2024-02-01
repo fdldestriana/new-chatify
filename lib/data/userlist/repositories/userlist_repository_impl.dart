@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/failures.dart';
-import 'package:new_chatify/data/shared/models/user_model.dart';
 import 'package:new_chatify/data/userlist/datasources/userlist_datasource.dart';
-import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
+import 'package:new_chatify/domain/userlist/entities/userlist_item_entity.dart';
 import 'package:new_chatify/domain/userlist/repositories/userlist_repository.dart';
 
 class UserListRepositoryImpl implements UserListRepository {
@@ -10,16 +9,27 @@ class UserListRepositoryImpl implements UserListRepository {
   UserListRepositoryImpl({required this.userListDataSource});
 
   @override
-  Future<Either<Failure, List<UserAppEntity>>> getUsers() async {
-    List<UserAppEntity> users = [];
+  Future<Either<Failure, UserListItemEntity>> getUserListItems() async {
     try {
-      List<UserAppModel> data = await userListDataSource.getUsers();
-      for (UserAppModel user in data) {
-        users.add(user.toEntity());
-      }
+      return Right(await userListDataSource
+          .getUserListItems()
+          .then((value) => value.toEntity()));
     } catch (e) {
       return Left(UnknownFailure(errorMessage: e.toString()));
     }
-    return Right(users);
   }
+
+  // @override
+  // Future<Either<Failure, List<UserAppEntity>>> getUsers() async {
+  //   List<UserAppEntity> users = [];
+  //   try {
+  //     List<UserAppModel> data = await userListDataSource.getUsers();
+  //     for (UserAppModel user in data) {
+  //       users.add(user.toEntity());
+  //     }
+  //   } catch (e) {
+  //     return Left(UnknownFailure(errorMessage: e.toString()));
+  //   }
+  //   return Right(users);
+  // }
 }

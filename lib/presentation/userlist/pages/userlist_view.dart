@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation/auth/pages/signin_view.dart';
@@ -18,7 +19,7 @@ class _UserListViewState extends State<UserListView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UserlistBloc>(context).add(UsersListLoadRequested());
+    BlocProvider.of<UserlistBloc>(context).add(UsersListItemLoadRequested());
   }
 
   @override
@@ -56,12 +57,12 @@ class _UserListViewState extends State<UserListView> {
         ),
       ),
       body: BlocBuilder<UserlistBloc, UserlistState>(builder: (context, state) {
-        if (state is UserlistLoadingState || state is UserlistInitial) {
+        if (state is UserlistItemLoadingState || state is UserlistInitial) {
           return const Center(
             child: CircularProgressIndicator(color: Color(0xFF31C48D)),
           );
         }
-        if (state is UserlistLoadFailedState) {
+        if (state is UserlistItemLoadFailedState) {
           return Center(
             child: Text(
               state.errorMessage,
@@ -69,10 +70,15 @@ class _UserListViewState extends State<UserListView> {
             ),
           );
         }
-        state as UserlistLoadSucceedState;
+        state as UserlistItemLoadSucceedState;
         return ListView.builder(
-          itemCount: state.users.length,
+          itemCount: state.userlistItemEntity.userList.length,
           itemBuilder: (BuildContext context, int index) {
+            String time = DateFormat("hh:mm").format(
+                state.userlistItemEntity.lastMessages.first.timestamp.toDate());
+            String message =
+                state.userlistItemEntity.lastMessages.first.message.toString();
+
             return GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -80,21 +86,44 @@ class _UserListViewState extends State<UserListView> {
                   MaterialPageRoute(
                     builder: (context) => ChatRoomsView(
                       user: UserAppEntity(
-                        uid: state.users[index].uid,
-                        email: state.users[index].email,
+                        uid: state.userlistItemEntity.userList[index].uid,
+                        email: state.userlistItemEntity.userList[index].email,
                       ),
                     ),
                   ),
                 );
               },
               child: ListTile(
-                leading:
-                    const CircleAvatar(child: Icon(Icons.person_2_rounded)),
-                title: Text(
-                  state.users[index].email
-                      .replaceAll("@", " ")
-                      .replaceAll(".com", ""),
-                  style: GoogleFonts.poppins(fontSize: 18),
+                leading: const CircleAvatar(
+                  radius: 40,
+                  child: Icon(Icons.person_2_rounded),
+                ),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          state.userlistItemEntity.userList[index].email
+                              .replaceAll("@", " ")
+                              .replaceAll(".com", ""),
+                          style: GoogleFonts.roboto(
+                              fontSize: 19, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          time,
+                          style: GoogleFonts.roboto(
+                              fontSize: 16, fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      message,
+                      style: GoogleFonts.roboto(
+                          fontSize: 17, fontWeight: FontWeight.w200),
+                    ),
+                  ],
                 ),
               ),
             );

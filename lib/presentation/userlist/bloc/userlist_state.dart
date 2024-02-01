@@ -9,14 +9,14 @@ sealed class UserlistState extends Equatable {
 
 final class UserlistInitial extends UserlistState {}
 
-final class UserlistLoadingState extends UserlistState {}
+final class UserlistItemLoadingState extends UserlistState {}
 
-final class UserlistLoadSucceedState extends UserlistState {
-  final List<UserAppEntity> users;
-  const UserlistLoadSucceedState({required this.users});
+final class UserlistItemLoadSucceedState extends UserlistState {
+  final UserListItemEntity userlistItemEntity;
+  const UserlistItemLoadSucceedState({required this.userlistItemEntity});
 }
 
-final class UserlistLoadFailedState extends UserlistState {
+final class UserlistItemLoadFailedState extends UserlistState {
   final String errorMessage;
-  const UserlistLoadFailedState({required this.errorMessage});
+  const UserlistItemLoadFailedState({required this.errorMessage});
 }
