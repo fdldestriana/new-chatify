@@ -41,7 +41,8 @@ class UserListDataSourceImpl implements UserListDataSource {
   @override
   Future<UserListItemModel> getUserListItems() async {
     List<UserAppModel> userList = [];
-    List<MessageModel> lastMessages = [];
+    List<MessageModel> latestMessages = [];
+    List<Map<String, dynamic>> userListItem = [];
     await _users.get().then(
       (value) {
         final docs = value.docs;
@@ -59,37 +60,45 @@ class UserListDataSourceImpl implements UserListDataSource {
       },
     );
     await _chats.get().then(
-      (value) async {
-        for (QueryDocumentSnapshot doc in value.docs) {
+      (value) {
+        List<QueryDocumentSnapshot> docs = value.docs;
+        for (QueryDocumentSnapshot doc in docs) {
           if (doc.id.contains(FirebaseAuth.instance.currentUser!.uid)) {
-            var data = await FirebaseFirestore.instance
+            var data = FirebaseFirestore.instance
+                .collection("chats")
                 .doc(doc.id)
                 .collection("messages")
                 .get();
-            final docs = data.docs;
-            lastMessages = docs.map(
-              (e) {
+            data.then((value) {
+              var docs = value.docs;
+              docs.map((e) {
                 Map<String, dynamic> data = e.data();
-                return MessageModel.fromMap(data);
-              },
-            ).toList();
-            //   .then(
-            // (value) async {
-            //   final docs = value.docs;
-            //   lastMessages = docs.map(
-            //     (e) {
-            //       Map<String, dynamic> data = e.data();
-            //       return MessageModel.fromMap(data);
-            //     },
-            //   ).toList();
-            // },
-            // onError: (e) {
-            //   throw Exception(e.toString());
-            // },
+                latestMessages.add(
+                  MessageModel.fromMap(data),
+                );
+              }).toList();
+            });
           }
         }
       },
     );
-    return UserListItemModel(userList: userList, lastMessages: lastMessages);
+
+    for (var user in userList) {
+      var userIds = [user.uid, FirebaseAuth.instance.currentUser!.uid];
+      userIds.sort();
+      var userDocId = userIds.join("_");
+      for (var message in latestMessages) {
+        var userIds = [user.uid, FirebaseAuth.instance.currentUser!.uid];
+        userIds.sort();
+        var messageDocId = userIds.join("_");
+        if (userDocId == messageDocId) {
+          userListItem.add({"user": user, "latestMessage": message});
+        } else {
+          userListItem.add({"user": user, "latestMessage": ""});
+        }
+      }
+    }
+
+    return UserListItemModel(userListItem: userListItem);
   }
 }

@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation/auth/pages/signin_view.dart';
@@ -72,12 +75,17 @@ class _UserListViewState extends State<UserListView> {
         }
         state as UserlistItemLoadSucceedState;
         return ListView.builder(
-          itemCount: state.userlistItemEntity.userList.length,
+          itemCount: state.userlistItemEntity.userListItem.length,
           itemBuilder: (BuildContext context, int index) {
-            String time = DateFormat("hh:mm").format(
-                state.userlistItemEntity.lastMessages.first.timestamp.toDate());
-            String message =
-                state.userlistItemEntity.lastMessages.first.message.toString();
+            log("USERS, ${state.userlistItemEntity.userListItem.length}");
+            log("USERS, ${state.userlistItemEntity.userListItem.length}");
+            UserAppEntity user =
+                state.userlistItemEntity.userListItem[index]["user"];
+            MessageEntity messageEntity =
+                state.userlistItemEntity.userListItem[index]["latestMessage"];
+            String time =
+                DateFormat("hh:mm").format(messageEntity.timestamp.toDate());
+            String message = messageEntity.message.toString();
 
             return GestureDetector(
               onTap: () {
@@ -86,8 +94,8 @@ class _UserListViewState extends State<UserListView> {
                   MaterialPageRoute(
                     builder: (context) => ChatRoomsView(
                       user: UserAppEntity(
-                        uid: state.userlistItemEntity.userList[index].uid,
-                        email: state.userlistItemEntity.userList[index].email,
+                        uid: user.uid,
+                        email: user.email,
                       ),
                     ),
                   ),
@@ -105,7 +113,7 @@ class _UserListViewState extends State<UserListView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          state.userlistItemEntity.userList[index].email
+                          user.email
                               .replaceAll("@", " ")
                               .replaceAll(".com", ""),
                           style: GoogleFonts.roboto(
