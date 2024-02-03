@@ -3,26 +3,26 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/core/usecases/usecase.dart';
-import 'package:new_chatify/domain/userlist/entities/userlist_item_entity.dart';
+import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/domain/userlist/usecases/userlist_usecase.dart';
 
 part 'userlist_event.dart';
 part 'userlist_state.dart';
 
-class UserlistBloc extends Bloc<UserlistEvent, UserlistState> {
+class UserlistBloc extends Bloc<UserlistEvent, UserListState> {
   final UserListUseCase userListUseCase;
-  UserlistBloc({required this.userListUseCase}) : super(UserlistInitial()) {
+  UserlistBloc({required this.userListUseCase}) : super(UserListInitial()) {
     on<UsersListItemLoadRequested>(
       (event, emit) async {
-        emit(UserlistItemLoadingState());
-        Either<Failure, UserListItemEntity> userlistItems =
+        emit(UserListLoadingState());
+        Either<Failure, List<UserAppEntity>> userList =
             await userListUseCase.call(NoParams());
-        userlistItems.fold(
+        userList.fold(
           (l) => emit(
-            UserlistItemLoadFailedState(errorMessage: l.errorMessage),
+            UserListLoadFailedState(errorMessage: l.errorMessage),
           ),
           (r) => emit(
-            UserlistItemLoadSucceedState(userlistItemEntity: r),
+            UserListLoadSucceedState(userList: r),
           ),
         );
       },

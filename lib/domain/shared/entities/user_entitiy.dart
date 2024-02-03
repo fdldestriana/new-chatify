@@ -1,10 +1,4 @@
-// class UserEntity {
-//   final String uid;
-//   final String email;
-//   final String password;
-
-//   UserEntity(this.password, {required this.uid, required this.email});
-// }
+import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 
 abstract class UserEntity {
   final String email;
@@ -18,5 +12,7 @@ class UserAuthEntity extends UserEntity {
 
 class UserAppEntity extends UserEntity {
   final String uid;
-  UserAppEntity({required super.email, required this.uid});
+  final MessageEntity latestMessage;
+  UserAppEntity(
+      {required super.email, required this.uid, required this.latestMessage});
 }

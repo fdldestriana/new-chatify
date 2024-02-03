@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/exception.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/data/auth/datasources/auth_datasource.dart';
-import 'package:new_chatify/data/shared/models/user_model.dart';
+import 'package:new_chatify/data/shared/models/user_app_model.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/domain/auth/repositories/auth_repository.dart';
 

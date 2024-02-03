@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 
 class MessageModel extends MessageEntity {
@@ -14,6 +15,15 @@ class MessageModel extends MessageEntity {
       receiverId: map["receiverId"],
       senderId: map["senderId"],
       timestamp: map["timestamp"],
+    );
+  }
+
+  factory MessageModel.empty() {
+    return MessageModel(
+      message: "",
+      receiverId: "",
+      senderId: "",
+      timestamp: Timestamp.now(),
     );
   }
 

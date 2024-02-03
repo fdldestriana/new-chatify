@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,13 +58,13 @@ class _UserListViewState extends State<UserListView> {
               fontWeight: FontWeight.bold),
         ),
       ),
-      body: BlocBuilder<UserlistBloc, UserlistState>(builder: (context, state) {
-        if (state is UserlistItemLoadingState || state is UserlistInitial) {
+      body: BlocBuilder<UserlistBloc, UserListState>(builder: (context, state) {
+        if (state is UserListLoadingState || state is UserListInitial) {
           return const Center(
             child: CircularProgressIndicator(color: Color(0xFF31C48D)),
           );
         }
-        if (state is UserlistItemLoadFailedState) {
+        if (state is UserListLoadFailedState) {
           return Center(
             child: Text(
               state.errorMessage,
@@ -73,19 +72,14 @@ class _UserListViewState extends State<UserListView> {
             ),
           );
         }
-        state as UserlistItemLoadSucceedState;
+        state as UserListLoadSucceedState;
         return ListView.builder(
-          itemCount: state.userlistItemEntity.userListItem.length,
+          itemCount: state.userList.length,
           itemBuilder: (BuildContext context, int index) {
-            log("USERS, ${state.userlistItemEntity.userListItem.length}");
-            log("USERS, ${state.userlistItemEntity.userListItem.length}");
-            UserAppEntity user =
-                state.userlistItemEntity.userListItem[index]["user"];
-            MessageEntity messageEntity =
-                state.userlistItemEntity.userListItem[index]["latestMessage"];
+            UserAppEntity user = state.userList[index];
+            MessageEntity messageEntity = user.latestMessage;
             String time =
                 DateFormat("hh:mm").format(messageEntity.timestamp.toDate());
-            String message = messageEntity.message.toString();
 
             return GestureDetector(
               onTap: () {
@@ -96,6 +90,7 @@ class _UserListViewState extends State<UserListView> {
                       user: UserAppEntity(
                         uid: user.uid,
                         email: user.email,
+                        latestMessage: user.latestMessage,
                       ),
                     ),
                   ),
@@ -103,7 +98,7 @@ class _UserListViewState extends State<UserListView> {
               },
               child: ListTile(
                 leading: const CircleAvatar(
-                  radius: 40,
+                  radius: 35,
                   child: Icon(Icons.person_2_rounded),
                 ),
                 title: Column(
@@ -120,14 +115,16 @@ class _UserListViewState extends State<UserListView> {
                               fontSize: 19, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          time,
+                          messageEntity.timestamp != Timestamp.now()
+                              ? time
+                              : "",
                           style: GoogleFonts.roboto(
                               fontSize: 16, fontWeight: FontWeight.normal),
                         ),
                       ],
                     ),
                     Text(
-                      message,
+                      messageEntity.message,
                       style: GoogleFonts.roboto(
                           fontSize: 17, fontWeight: FontWeight.w200),
                     ),

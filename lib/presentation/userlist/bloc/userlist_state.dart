@@ -1,22 +1,22 @@
 part of 'userlist_bloc.dart';
 
-sealed class UserlistState extends Equatable {
-  const UserlistState();
+sealed class UserListState extends Equatable {
+  const UserListState();
 
   @override
   List<Object> get props => [];
 }
 
-final class UserlistInitial extends UserlistState {}
+final class UserListInitial extends UserListState {}
 
-final class UserlistItemLoadingState extends UserlistState {}
+final class UserListLoadingState extends UserListState {}
 
-final class UserlistItemLoadSucceedState extends UserlistState {
-  final UserListItemEntity userlistItemEntity;
-  const UserlistItemLoadSucceedState({required this.userlistItemEntity});
+final class UserListLoadSucceedState extends UserListState {
+  final List<UserAppEntity> userList;
+  const UserListLoadSucceedState({required this.userList});
 }
 
-final class UserlistItemLoadFailedState extends UserlistState {
+final class UserListLoadFailedState extends UserListState {
   final String errorMessage;
-  const UserlistItemLoadFailedState({required this.errorMessage});
+  const UserListLoadFailedState({required this.errorMessage});
 }

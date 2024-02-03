@@ -30,12 +30,20 @@ class ChatDataSourceImpl extends ChatDataSource {
 
   @override
   Future<void> sendMessage(String docId, Map<String, dynamic> message) async {
+    var ids = docId.split("_");
     try {
       firebaseFirestore
           .collection("chats")
           .doc(docId)
           .collection("messages")
           .add(message);
+
+      for (var id in ids) {
+        firebaseFirestore
+            .collection("users")
+            .doc(id)
+            .update({"latestMessage": message});
+      }
     } catch (e) {
       throw Exception(e.toString());
     }

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/failures.dart';
-import 'package:new_chatify/domain/userlist/entities/userlist_item_entity.dart';
+import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 
 abstract class UserListRepository {
-  Future<Either<Failure, UserListItemEntity>> getUserListItems();
+  Future<Either<Failure, List<UserAppEntity>>> getUserList();
 }
