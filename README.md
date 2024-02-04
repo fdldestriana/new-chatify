@@ -31,7 +31,13 @@ Below are the screen shoots from the project.
 
 |                             |                              |
 | ----------------------------------- | ----------------------------------- |
-| ![Screenshot_2024-01-30-10-34-37-54_2d9603c682488ff0994360eab56ac86f](https://github.com/fdldestriana/new-chatify/assets/97951046/e6ba7458-3f73-4cc2-bb7a-4334a1f9f815) | ![Screenshot_2024-01-30-10-34-42-21_2d9603c682488ff0994360eab56ac86f](https://github.com/fdldestriana/new-chatify/assets/97951046/6e261297-7516-4f4f-9e84-7e752a47e0d4) |
+| ![Screenshot_2024-02-04-20-39-56-80_2d9603c682488ff0994360eab56ac86f](https://github.com/fdldestriana/new-chatify/assets/97951046/1f5505c4-4806-453d-b89e-0f45357a3b64) | ![Screenshot_2024-02-04-20-39-53-49_2d9603c682488ff0994360eab56ac86f](https://github.com/fdldestriana/new-chatify/assets/97951046/8f87c41d-70ba-46e9-8122-07ebb1c9e044) |
+
+
+
+
+
+
 
 
 
