@@ -9,13 +9,16 @@ class MessageModel extends MessageEntity {
     required super.timestamp,
   });
 
-  factory MessageModel.fromMap(Map<String, dynamic> map) {
-    return MessageModel(
-      message: map["message"],
-      receiverId: map["receiverId"],
-      senderId: map["senderId"],
-      timestamp: map["timestamp"],
-    );
+  factory MessageModel.fromMap(Map<String, dynamic>? map) {
+    MessageModel messageModel = (map != null)
+        ? MessageModel(
+            message: map["message"],
+            receiverId: map["receiverId"],
+            senderId: map["senderId"],
+            timestamp: map["timestamp"],
+          )
+        : MessageModel.empty();
+    return messageModel;
   }
 
   factory MessageModel.empty() {

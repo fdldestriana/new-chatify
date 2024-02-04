@@ -7,19 +7,21 @@ abstract class UserListDataSource {
 }
 
 class UserListDataSourceImpl implements UserListDataSource {
-  final CollectionReference _users =
-      FirebaseFirestore.instance.collection("users");
   List<UserAppModel> _userList = [];
   @override
   Future<List<UserAppModel>> getUserList() async {
-    await _users.get().then(
+    await FirebaseFirestore.instance
+        .collection("users")
+        .orderBy("latestMessage.timestamp", descending: true)
+        .get()
+        .then(
       (value) {
         final docs = value.docs;
         _userList = docs
             .where((doc) => doc.id != FirebaseAuth.instance.currentUser!.uid)
             .map(
           (doc) {
-            Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+            Map<String, dynamic> data = doc.data();
             return UserAppModel.fromMap(data);
           },
         ).toList();
