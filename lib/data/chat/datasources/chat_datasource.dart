@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:new_chatify/data/chat/models/message_model.dart';
+import 'package:new_chatify/data/shared/models/message_model.dart';
 
 abstract class ChatDataSource {
   Future<void> sendMessage(String docId, Map<String, dynamic> message);
@@ -30,12 +30,20 @@ class ChatDataSourceImpl extends ChatDataSource {
 
   @override
   Future<void> sendMessage(String docId, Map<String, dynamic> message) async {
+    var ids = docId.split("_");
     try {
       firebaseFirestore
           .collection("chats")
           .doc(docId)
           .collection("messages")
           .add(message);
+
+      for (var id in ids) {
+        firebaseFirestore
+            .collection("users")
+            .doc(id)
+            .update({"latestMessage": message});
+      }
     } catch (e) {
       throw Exception(e.toString());
     }

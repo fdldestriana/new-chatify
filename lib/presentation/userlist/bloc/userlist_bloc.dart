@@ -9,17 +9,22 @@ import 'package:new_chatify/domain/userlist/usecases/userlist_usecase.dart';
 part 'userlist_event.dart';
 part 'userlist_state.dart';
 
-class UserlistBloc extends Bloc<UserlistEvent, UserlistState> {
+class UserlistBloc extends Bloc<UserlistEvent, UserListState> {
   final UserListUseCase userListUseCase;
-  UserlistBloc({required this.userListUseCase}) : super(UserlistInitial()) {
-    on<UsersListLoadRequested>(
+  UserlistBloc({required this.userListUseCase}) : super(UserListInitial()) {
+    on<UsersListItemLoadRequested>(
       (event, emit) async {
-        emit(UserlistLoadingState());
-        Either<Failure, List<UserAppEntity>> result =
+        emit(UserListLoadingState());
+        Either<Failure, List<UserAppEntity>> userList =
             await userListUseCase.call(NoParams());
-        result.fold(
-            (l) => emit(UserlistLoadFailedState(errorMessage: l.errorMessage)),
-            (r) => emit(UserlistLoadSucceedState(users: r)));
+        userList.fold(
+          (l) => emit(
+            UserListLoadFailedState(errorMessage: l.errorMessage),
+          ),
+          (r) => emit(
+            UserListLoadSucceedState(userList: r),
+          ),
+        );
       },
     );
   }

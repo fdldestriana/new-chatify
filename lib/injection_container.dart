@@ -49,17 +49,14 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SignOutUseCase(authRepository: sl()));
 
   sl.registerLazySingleton(() => UserListUseCase(userListRepository: sl()));
-
   sl.registerLazySingleton(() => SendMessageUseCase(chatRepository: sl()));
   sl.registerLazySingleton(() => GetMessagesUseCase(chatRepository: sl()));
 
   // Repositories registration
   sl.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(authDataSource: sl()));
-
   sl.registerLazySingleton<UserListRepository>(
       () => UserListRepositoryImpl(userListDataSource: sl()));
-
   sl.registerLazySingleton<ChatRepository>(
       () => ChatRepositoryImpl(chatDataSource: sl()));
 

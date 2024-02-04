@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_chatify/domain/chat/entities/message_entity.dart';
+import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/chat/bloc/chat_bloc.dart';
 import 'package:new_chatify/presentation/chat/widgets/re_chat_bubble_wdiget.dart';

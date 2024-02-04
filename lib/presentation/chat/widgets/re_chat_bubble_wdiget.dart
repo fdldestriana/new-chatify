@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:new_chatify/domain/chat/entities/message_entity.dart';
+import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 
 class ReChatBubbleWidget extends StatelessWidget {
   const ReChatBubbleWidget({super.key, required this.messageEntity});
