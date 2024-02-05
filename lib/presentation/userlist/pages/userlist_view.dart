@@ -113,10 +113,14 @@ class _UserListViewState extends State<UserListView> {
                   );
                 },
                 child: ListTile(
-                  leading: Image.network(
-                    'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                    fit: BoxFit.fill,
-                    width: 75,
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(32.5),
+                    child: Image.network(
+                      'https://docs.flutter.dev/assets/images/dash/BigDashAndLittleDash.png',
+                      fit: BoxFit.fill,
+                      width: 75,
+                      height: 75,
+                    ),
                   ),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
