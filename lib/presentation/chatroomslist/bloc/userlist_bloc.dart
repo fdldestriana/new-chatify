@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/core/usecases/usecase.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
-import 'package:new_chatify/domain/userlist/usecases/userlist_usecase.dart';
+import 'package:new_chatify/domain/chatroomslist/usecases/userlist_usecase.dart';
 
 part 'userlist_event.dart';
 part 'userlist_state.dart';

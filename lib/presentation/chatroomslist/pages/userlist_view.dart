@@ -8,8 +8,8 @@ import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation/auth/pages/signin_view.dart';
 import 'package:new_chatify/presentation/chat/pages/chat_rooms_view.dart';
-import 'package:new_chatify/presentation/userlist/bloc/userlist_bloc.dart';
-import 'package:new_chatify/presentation/userlist/widgets/re_create_chat_button.dart';
+import 'package:new_chatify/presentation/chatroomslist/bloc/userlist_bloc.dart';
+import 'package:new_chatify/presentation/chatroomslist/widgets/re_create_chat_button.dart';
 
 class UserListView extends StatefulWidget {
   const UserListView({super.key});

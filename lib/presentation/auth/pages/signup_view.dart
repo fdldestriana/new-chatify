@@ -10,7 +10,7 @@ import 'package:new_chatify/presentation/auth/widgets/re_logo_widget.dart';
 import 'package:new_chatify/presentation/auth/widgets/re_notloggedin_widget.dart';
 import 'package:new_chatify/presentation/auth/widgets/re_remember_widget.dart';
 import 'package:new_chatify/presentation/auth/widgets/re_textformfield_widget.dart';
-import 'package:new_chatify/presentation/userlist/pages/userlist_view.dart';
+import 'package:new_chatify/presentation/chatroomslist/pages/userlist_view.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});

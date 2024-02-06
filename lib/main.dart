@@ -9,8 +9,8 @@ import 'package:new_chatify/core/utils/state_util.dart';
 import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation/auth/pages/signin_view.dart';
 import 'package:new_chatify/presentation/chat/bloc/chat_bloc.dart';
-import 'package:new_chatify/presentation/userlist/bloc/userlist_bloc.dart';
-import 'package:new_chatify/presentation/userlist/pages/userlist_view.dart';
+import 'package:new_chatify/presentation/chatroomslist/bloc/userlist_bloc.dart';
+import 'package:new_chatify/presentation/chatroomslist/pages/userlist_view.dart';
 import 'injection_container.dart' as di;
 
 void main() async {

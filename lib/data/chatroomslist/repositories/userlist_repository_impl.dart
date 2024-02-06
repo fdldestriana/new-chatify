@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/data/shared/models/user_app_model.dart';
-import 'package:new_chatify/data/userlist/datasources/userlist_datasource.dart';
+import 'package:new_chatify/data/chatroomslist/datasources/userlist_datasource.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
-import 'package:new_chatify/domain/userlist/repositories/userlist_repository.dart';
+import 'package:new_chatify/domain/chatroomslist/repositories/userlist_repository.dart';
 
 class UserListRepositoryImpl implements UserListRepository {
   final UserListDataSource userListDataSource;
