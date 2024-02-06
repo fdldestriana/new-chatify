@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_chatify/data/shared/models/user_app_model.dart';
 
-abstract class UserListDataSource {
+abstract class ChatRoomsListDataSource {
   Future<List<UserAppModel>> getUserList();
 }
 
-class UserListDataSourceImpl implements UserListDataSource {
+class ChatRoomsListDataSourceImpl implements ChatRoomsListDataSource {
   List<UserAppModel> _userList = [];
   @override
   Future<List<UserAppModel>> getUserList() async {

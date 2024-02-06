@@ -8,21 +8,22 @@ import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
 import 'package:new_chatify/presentation/auth/pages/signin_view.dart';
 import 'package:new_chatify/presentation/chat/pages/chat_rooms_view.dart';
-import 'package:new_chatify/presentation/chatroomslist/bloc/userlist_bloc.dart';
+import 'package:new_chatify/presentation/chatroomslist/bloc/chatrooms_list_bloc.dart';
 import 'package:new_chatify/presentation/chatroomslist/widgets/re_create_chat_button.dart';
 
-class UserListView extends StatefulWidget {
-  const UserListView({super.key});
+class ChatRoomsListView extends StatefulWidget {
+  const ChatRoomsListView({super.key});
 
   @override
-  State<UserListView> createState() => _UserListViewState();
+  State<ChatRoomsListView> createState() => _ChatRoomsListViewState();
 }
 
-class _UserListViewState extends State<UserListView> {
+class _ChatRoomsListViewState extends State<ChatRoomsListView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UserlistBloc>(context).add(UsersListItemLoadRequested());
+    BlocProvider.of<ChatRoomsListBloc>(context)
+        .add(ChatRoomsListLoadRequested());
   }
 
   @override
@@ -59,14 +60,15 @@ class _UserListViewState extends State<UserListView> {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        body:
-            BlocBuilder<UserlistBloc, UserListState>(builder: (context, state) {
-          if (state is UserListLoadingState || state is UserListInitial) {
+        body: BlocBuilder<ChatRoomsListBloc, ChatRoomsListState>(
+            builder: (context, state) {
+          if (state is ChatRoomsListLoadingState ||
+              state is ChatRoomsListInitial) {
             return const Center(
               child: CircularProgressIndicator(color: Color(0xFF31C48D)),
             );
           }
-          if (state is UserListLoadFailedState) {
+          if (state is ChatRoomsListLoadFailedState) {
             return Center(
               child: Text(
                 state.errorMessage,
@@ -74,11 +76,11 @@ class _UserListViewState extends State<UserListView> {
               ),
             );
           }
-          state as UserListLoadSucceedState;
+          state as ChatRoomsListLoadSucceedState;
           return ListView.builder(
-            itemCount: state.userList.length,
+            itemCount: state.chatRoomsList.length,
             itemBuilder: (BuildContext context, int index) {
-              UserAppEntity user = state.userList[index];
+              UserAppEntity user = state.chatRoomsList[index];
               /*
             TODO: Find clever way to extract the user name
              */

@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:new_chatify/core/error/failures.dart';
-import 'package:new_chatify/data/shared/models/user_app_model.dart';
 import 'package:new_chatify/data/chatroomslist/datasources/userlist_datasource.dart';
+import 'package:new_chatify/data/shared/models/user_app_model.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
-import 'package:new_chatify/domain/chatroomslist/repositories/userlist_repository.dart';
+import 'package:new_chatify/domain/chatroomslist/repositories/chatrooms_list_repository.dart';
 
-class UserListRepositoryImpl implements UserListRepository {
+class ChatRoomsListRepositoryImpl implements ChatRoomsListRepository {
   final UserListDataSource userListDataSource;
-  UserListRepositoryImpl({required this.userListDataSource});
+  ChatRoomsListRepositoryImpl({required this.userListDataSource});
 
   @override
   Future<Either<Failure, List<UserAppEntity>>> getUserList() async {
