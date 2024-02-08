@@ -3,7 +3,7 @@ import 'package:new_chatify/data/auth/datasources/auth_datasource.dart';
 import 'package:new_chatify/data/auth/repositories/auth_repository_impl.dart';
 import 'package:new_chatify/data/chat/datasources/chat_datasource.dart';
 import 'package:new_chatify/data/chat/repositories/chat_repository_impl.dart';
-import 'package:new_chatify/data/chatroomslist/datasources/userlist_datasource.dart';
+import 'package:new_chatify/data/chatroomslist/datasources/chatrooms_list_datasource.dart';
 import 'package:new_chatify/data/chatroomslist/repositories/chatrooms_list_repository_impl.dart';
 import 'package:new_chatify/domain/auth/repositories/auth_repository.dart';
 import 'package:new_chatify/domain/auth/usecases/signin_usecase.dart';
@@ -49,7 +49,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SignOutUseCase(authRepository: sl()));
 
   sl.registerLazySingleton(
-      () => ChatRoomsListUseCase(userListRepository: sl()));
+      () => ChatRoomsListUseCase(chatRoomsListRepository: sl()));
   sl.registerLazySingleton(() => SendMessageUseCase(chatRepository: sl()));
   sl.registerLazySingleton(() => GetMessagesUseCase(chatRepository: sl()));
 
@@ -57,12 +57,13 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(authDataSource: sl()));
   sl.registerLazySingleton<ChatRoomsListRepository>(
-      () => ChatRoomsListRepositoryImpl(userListDataSource: sl()));
+      () => ChatRoomsListRepositoryImpl(chatRoomsListDataSource: sl()));
   sl.registerLazySingleton<ChatRepository>(
       () => ChatRepositoryImpl(chatDataSource: sl()));
 
   // Data sources registration
   sl.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
-  sl.registerLazySingleton<UserListDataSource>(() => UserListDataSourceImpl());
+  sl.registerLazySingleton<ChatRoomsListDataSource>(
+      () => ChatRoomsListDataSourceImpl());
   sl.registerLazySingleton<ChatDataSource>(() => ChatDataSourceImpl());
 }
