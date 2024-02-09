@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:new_chatify/core/utils/get_profilepic.dart';
 import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/chat/bloc/chat_bloc.dart';
@@ -18,7 +20,8 @@ class ChatRoomsView extends StatefulWidget {
 class _ChatRoomsViewState extends State<ChatRoomsView> {
   TextEditingController messageController = TextEditingController();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  late String interlocutor;
+  late String interlocutorFirstName;
+  late String interlocutorLastName;
   late String docId;
 
   @override
@@ -27,8 +30,9 @@ class _ChatRoomsViewState extends State<ChatRoomsView> {
     var userIds = [widget.user.uid, firebaseAuth.currentUser!.uid];
     userIds.sort();
     docId = userIds.join("_");
-    interlocutor = widget.user.email.replaceAll("@", " ");
-    interlocutor = interlocutor.replaceAll(".com", "");
+    List<String> fullName = widget.user.email.split("@");
+    interlocutorFirstName = fullName[0];
+    interlocutorLastName = fullName[1].split(".com")[0];
   }
 
   @override
@@ -53,9 +57,18 @@ class _ChatRoomsViewState extends State<ChatRoomsView> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const CircleAvatar(child: Icon(Icons.person_2_rounded)),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset(
+                getProfilepic(interlocutorFirstName),
+                fit: BoxFit.contain,
+                width: 60,
+                height: 60,
+              ),
+            ),
             const SizedBox(width: 15),
-            Text(interlocutor),
+            Text(
+                "${toBeginningOfSentenceCase(interlocutorFirstName)} ${toBeginningOfSentenceCase(interlocutorLastName)}"),
           ],
         ),
       ),

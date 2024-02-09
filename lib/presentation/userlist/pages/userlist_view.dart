@@ -1,15 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:new_chatify/domain/shared/entities/message_entity.dart';
+import 'package:new_chatify/core/utils/get_profilepic.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
-import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
-import 'package:new_chatify/presentation/auth/pages/signin_view.dart';
 import 'package:new_chatify/presentation/chat/pages/chat_rooms_view.dart';
-import 'package:new_chatify/presentation/userlist/bloc/userlist_bloc.dart';
-import 'package:new_chatify/presentation/userlist/widgets/re_create_chat_button.dart';
+import 'package:new_chatify/presentation/userlist/bloc/bloc/userlist_bloc.dart';
 
 class UserListView extends StatefulWidget {
   const UserListView({super.key});
@@ -22,45 +18,45 @@ class _UserListViewState extends State<UserListView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UserlistBloc>(context).add(UsersListItemLoadRequested());
+    BlocProvider.of<UserListBloc>(context).add(UserListLoadRequested());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          actions: <IconButton>[
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                size: 26.0,
-              ),
+      appBar: AppBar(
+        actions: <IconButton>[
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
+              size: 26.0,
             ),
-            IconButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(AuthSignoutRequested());
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SigninView()),
-                    (route) => false);
-              },
-              icon: const Icon(
-                Icons.logout,
-                size: 26.0,
-              ),
-            )
-          ],
-          title: Text(
-            "Chatify",
-            style: GoogleFonts.poppins(
-                color: const Color(0xFF000000),
-                fontSize: 32,
-                fontWeight: FontWeight.bold),
           ),
+          // IconButton(
+          //   onPressed: () {
+          //     context.read<AuthBloc>().add(AuthSignoutRequested());
+          //     Navigator.pushAndRemoveUntil(
+          //         context,
+          //         MaterialPageRoute(builder: (context) => const SigninView()),
+          //         (route) => false);
+          //   },
+          //   icon: const Icon(
+          //     Icons.logout,
+          //     size: 26.0,
+          //   ),
+          // )
+        ],
+        title: Text(
+          "Contacts on Chatify",
+          style: GoogleFonts.poppins(
+              color: const Color(0xFF000000),
+              fontSize: 17,
+              fontWeight: FontWeight.bold),
         ),
-        body:
-            BlocBuilder<UserlistBloc, UserListState>(builder: (context, state) {
+      ),
+      body: BlocBuilder<UserListBloc, UserListState>(
+        builder: (context, state) {
           if (state is UserListLoadingState || state is UserListInitial) {
             return const Center(
               child: CircularProgressIndicator(color: Color(0xFF31C48D)),
@@ -86,17 +82,6 @@ class _UserListViewState extends State<UserListView> {
               String firstName = fullName[0];
               String lastName = fullName[1].split(".com")[0];
 
-              MessageEntity messageEntity = user.latestMessage;
-              String message = (messageEntity.senderId ==
-                          FirebaseAuth.instance.currentUser!.uid ||
-                      messageEntity.receiverId ==
-                          FirebaseAuth.instance.currentUser!.uid)
-                  ? messageEntity.message
-                  : "";
-
-              String time =
-                  DateFormat("hh:mm").format(messageEntity.timestamp.toDate());
-
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -106,17 +91,20 @@ class _UserListViewState extends State<UserListView> {
                         user: UserAppEntity(
                           uid: user.uid,
                           email: user.email,
-                          latestMessage: user.latestMessage,
                         ),
                       ),
                     ),
                   );
                 },
                 child: ListTile(
-                  leading: Image.network(
-                    'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                    fit: BoxFit.fill,
-                    width: 75,
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(32.5),
+                    child: Image.asset(
+                      getProfilepic(firstName),
+                      fit: BoxFit.contain,
+                      width: 75,
+                      height: 75,
+                    ),
                   ),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,26 +117,27 @@ class _UserListViewState extends State<UserListView> {
                             style: GoogleFonts.roboto(
                                 fontSize: 19, fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            messageEntity.message == "" ? "" : time,
-                            style: GoogleFonts.roboto(
-                                fontSize: 16, fontWeight: FontWeight.normal),
-                          ),
+                          // Text(
+                          //   time,
+                          //   style: GoogleFonts.roboto(
+                          //       fontSize: 16, fontWeight: FontWeight.normal),
+                          // ),
                         ],
                       ),
-                      Text(
-                        message,
-                        style: GoogleFonts.roboto(
-                            fontSize: 17, fontWeight: FontWeight.w200),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      // Text(
+                      //   messageEntity.message,
+                      //   style: GoogleFonts.roboto(
+                      //       fontSize: 17, fontWeight: FontWeight.w200),
+                      //   overflow: TextOverflow.ellipsis,
+                      // ),
                     ],
                   ),
                 ),
               );
             },
           );
-        }),
-        floatingActionButton: const ReCreateChatButton());
+        },
+      ),
+    );
   }
 }
