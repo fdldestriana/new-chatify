@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:new_chatify/core/error/failures.dart';
 import 'package:new_chatify/core/usecases/usecase.dart';
+import 'package:new_chatify/domain/chatroomslist/entities/chatrooms_list_entity.dart';
 import 'package:new_chatify/domain/chatroomslist/usecases/chatrooms_list_usecase.dart';
-import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 
 part 'chatrooms_list_event.dart';
 part 'chatrooms_list_state.dart';
@@ -16,7 +16,7 @@ class ChatRoomsListBloc extends Bloc<ChatRoomsListEvent, ChatRoomsListState> {
     on<ChatRoomsListLoadRequested>(
       (event, emit) async {
         emit(ChatRoomsListLoadingState());
-        Either<Failure, List<UserAppEntity>> chatRoomsList =
+        Either<Failure, List<ChatRoomsListEntity>> chatRoomsList =
             await chatRoomsListUseCase.call(NoParams());
         chatRoomsList.fold(
           (l) => emit(

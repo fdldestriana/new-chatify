@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:new_chatify/core/utils/get_profilepic.dart';
 import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/auth/bloc/bloc/auth_bloc.dart';
@@ -80,7 +80,7 @@ class _ChatRoomsListViewState extends State<ChatRoomsListView> {
           return ListView.builder(
             itemCount: state.chatRoomsList.length,
             itemBuilder: (BuildContext context, int index) {
-              UserAppEntity user = state.chatRoomsList[index];
+              UserAppEntity user = state.chatRoomsList[index].userApp;
               /*
             TODO: Find clever way to extract the user name
              */
@@ -88,13 +88,8 @@ class _ChatRoomsListViewState extends State<ChatRoomsListView> {
               String firstName = fullName[0];
               String lastName = fullName[1].split(".com")[0];
 
-              MessageEntity messageEntity = user.latestMessage;
-              String message = (messageEntity.senderId ==
-                          FirebaseAuth.instance.currentUser!.uid ||
-                      messageEntity.receiverId ==
-                          FirebaseAuth.instance.currentUser!.uid)
-                  ? messageEntity.message
-                  : "";
+              MessageEntity messageEntity =
+                  state.chatRoomsList[index].latestMessage;
 
               String time =
                   DateFormat("hh:mm").format(messageEntity.timestamp.toDate());
@@ -108,7 +103,6 @@ class _ChatRoomsListViewState extends State<ChatRoomsListView> {
                         user: UserAppEntity(
                           uid: user.uid,
                           email: user.email,
-                          latestMessage: user.latestMessage,
                         ),
                       ),
                     ),
@@ -117,9 +111,9 @@ class _ChatRoomsListViewState extends State<ChatRoomsListView> {
                 child: ListTile(
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(32.5),
-                    child: Image.network(
-                      'https://docs.flutter.dev/assets/images/dash/BigDashAndLittleDash.png',
-                      fit: BoxFit.fill,
+                    child: Image.asset(
+                      getProfilepic(firstName),
+                      fit: BoxFit.contain,
                       width: 75,
                       height: 75,
                     ),
@@ -136,14 +130,14 @@ class _ChatRoomsListViewState extends State<ChatRoomsListView> {
                                 fontSize: 19, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            messageEntity.message == "" ? "" : time,
+                            time,
                             style: GoogleFonts.roboto(
                                 fontSize: 16, fontWeight: FontWeight.normal),
                           ),
                         ],
                       ),
                       Text(
-                        message,
+                        messageEntity.message,
                         style: GoogleFonts.roboto(
                             fontSize: 17, fontWeight: FontWeight.w200),
                         overflow: TextOverflow.ellipsis,

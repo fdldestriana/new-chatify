@@ -12,7 +12,7 @@ final class ChatRoomsListInitial extends ChatRoomsListState {}
 final class ChatRoomsListLoadingState extends ChatRoomsListState {}
 
 final class ChatRoomsListLoadSucceedState extends ChatRoomsListState {
-  final List<UserAppEntity> chatRoomsList;
+  final List<ChatRoomsListEntity> chatRoomsList;
   const ChatRoomsListLoadSucceedState({required this.chatRoomsList});
 }
 

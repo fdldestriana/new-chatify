@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:new_chatify/core/utils/get_profilepic.dart';
 import 'package:new_chatify/domain/shared/entities/message_entity.dart';
 import 'package:new_chatify/domain/shared/entities/user_entitiy.dart';
 import 'package:new_chatify/presentation/chat/bloc/chat_bloc.dart';
@@ -58,9 +59,9 @@ class _ChatRoomsViewState extends State<ChatRoomsView> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
-              child: Image.network(
-                "https://docs.flutter.dev/assets/images/dash/BigDashAndLittleDash.png",
-                fit: BoxFit.fill,
+              child: Image.asset(
+                getProfilepic(interlocutorFirstName),
+                fit: BoxFit.contain,
                 width: 60,
                 height: 60,
               ),
